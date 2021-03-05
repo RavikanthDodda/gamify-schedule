@@ -1,14 +1,19 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Button, TextInput, TextInputMask } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 
 import { StyleSheet, Text, View } from "react-native";
+import validation from "../utils/validation";
+import validate from "../utils/validation_wrapper";
 
 export default function RegistrationPage() {
   const [email, setEmail] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [phone, setPhone] = React.useState("");
+  const [rePassword, setRePassword] = React.useState("");
+
+  const [emailError, setEmailError] = React.useState("");
+  const [passwordError, setPasswordError] = React.useState("");
+  const [rePasswordError, setRePasswordError] = React.useState("");
 
   return (
     <View style={styles.container}>
@@ -19,29 +24,40 @@ export default function RegistrationPage() {
         keyboardType="email-address"
         textContentType="emailAddress"
         onChangeText={(email) => setEmail(email)}
+        onBlur={() => {
+          setEmailError(validate("email", email));
+        }}
+        error={emailError !== ""}
       />
       <TextInput
-        label="username"
+        label="Username"
         value={username}
         style={styles.field}
         textContentType="username"
         onChangeText={(username) => setUsername(username)}
       />
       <TextInput
-        label="password"
+        label="Password"
         value={password}
         style={styles.field}
         textContentType="password"
         secureTextEntry={true}
         onChangeText={(password) => setPassword(password)}
+        onBlur={() => {
+          setPasswordError(validate("password", password));
+        }}
+        error={passwordError !== ""}
       />
       <TextInput
-        label="phone"
-        value={phone}
+        label="Re-type password"
+        value={rePassword}
         style={styles.field}
-        keyboardType="phone-pad"
-        textContentType="telephoneNumber"
-        onChangeText={(phone) => setPhone(phone)}
+        textContentType="password"
+        secureTextEntry={true}
+        onChangeText={(text) => {
+          setRePassword(text);
+        }}
+        error={rePasswordError !== ""}
       />
       <View style={styles.btn}>
         <Button mode="contained">Register</Button>
