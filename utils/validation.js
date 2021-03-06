@@ -15,8 +15,14 @@ const validation = {
     },
     length: {
       minimum: 8,
-      message: "^Your password must be at least 5 characters",
+
+      message: "^Your password must be at least 8 characters",
     },
+    // format: {
+    //   pattern: "/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/",
+
+    //   message: "Not complex enough",
+    // },
   },
 };
 
