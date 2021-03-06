@@ -1,10 +1,8 @@
 import React from "react";
 import { Button, TextInput } from "react-native-paper";
-
 import { StyleSheet, Text, View } from "react-native";
-import validate from "../utils/validation_wrapper";
 
-export default function LoginPage(){
+export default function LoginPage({ navigation }){
     const [username, setUsername] = React.useState("")
     const [password, setPassword] = React.useState("")
 
@@ -43,6 +41,10 @@ export default function LoginPage(){
           <View style={styles.btn}>
             <Button mode="contained">Login</Button>
           </View>
+          <Text style={styles.newUserText}>New user?</Text>
+          <View style={styles.btn}>
+            <Button mode="contained" onPress={() => navigation.navigate('Register')}>Register</Button>
+          </View>
         </View>
     )
 }
@@ -66,5 +68,12 @@ const styles = StyleSheet.create({
   },
     errorText: {
       color: "red",
+    },
+    newUserText:{
+      marginTop: 10,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 10
     },
   });
