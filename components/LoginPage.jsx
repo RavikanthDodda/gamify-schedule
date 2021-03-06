@@ -34,7 +34,7 @@ export default function LoginPage(){
               secureTextEntry={true}
               onChangeText={(password) => setPassword(password)}
               onBlur={() => {
-                setPasswordError(validate("password", password));
+                setPasswordError(password !== "" ? "" : "Please enter a password");
               }}
               error={passwordError !== ""}
             />
