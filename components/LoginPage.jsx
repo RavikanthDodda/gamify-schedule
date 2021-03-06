@@ -4,10 +4,6 @@ import { Button, TextInput } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
 import validate from "../utils/validation_wrapper";
 
-const Separator = () => (
-    <View style={styles.separator} />
-  );
-
 export default function LoginPage(){
     const [username, setUsername] = React.useState("")
     const [password, setPassword] = React.useState("")
