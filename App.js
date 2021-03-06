@@ -4,12 +4,13 @@ import { TextInput } from "react-native-paper";
 
 import { StyleSheet, Text, View } from "react-native";
 import RegistrationPage from "./components/RegistrationPage";
+import LoginPage from "./components/LoginPage"
 
 export default function App() {
   const [text, setText] = React.useState("");
 
   return (
-   <RegistrationPage /> 
+   < LoginPage/> 
   );
 }
 
