@@ -1,23 +1,17 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import RegistrationPage from "./components/RegistrationPage";
-import LoginPage from "./components/LoginPage";
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-
-const Stack = createStackNavigator();
+import NavBar from "./components/NavBar";
+import { StyleSheet } from "react-native";
+import RegistrationPage from "./components/Pages/RegistrationPage";
+import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
   const [text, setText] = React.useState("");
 
   return (
     <NavigationContainer>
-    <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen name="Login" component={LoginPage} />
-      <Stack.Screen name="Register" component={RegistrationPage} />  
-    </Stack.Navigator>
-  </NavigationContainer>
+      <NavBar />
+    </NavigationContainer>
   );
 }
 
