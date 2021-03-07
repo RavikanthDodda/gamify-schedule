@@ -83,8 +83,7 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     padding: 30,
-    marginTop: 100,
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     justifyContent: "center",
   },
   field: {
