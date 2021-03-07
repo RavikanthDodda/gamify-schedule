@@ -1,37 +1,16 @@
 import React from "react";
 import { Button, TextInput } from "react-native-paper";
-
 import { StyleSheet, Text, View } from "react-native";
-import validate from "../utils/validation_wrapper";
 
-// TODO - on submit handler and check re typed password
-export default function RegistrationPage() {
-  const [email, setEmail] = React.useState("");
+export default function LoginPage({ navigation }) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [rePassword, setRePassword] = React.useState("");
 
-  const [emailError, setEmailError] = React.useState("");
   const [passwordError, setPasswordError] = React.useState("");
   const [usernameError, setUsernameError] = React.useState("");
-  const [rePasswordError, setRePasswordError] = React.useState("");
 
   return (
     <View style={styles.container}>
-      <View style={styles.field}>
-        <TextInput
-          label="Email"
-          value={email}
-          keyboardType="email-address"
-          textContentType="emailAddress"
-          onChangeText={(email) => setEmail(email)}
-          onBlur={() => {
-            setEmailError(validate("email", email));
-          }}
-          error={emailError !== ""}
-        />
-        <Text style={styles.errorText}>{emailError}</Text>
-      </View>
       <View style={styles.field}>
         <TextInput
           label="Username"
@@ -53,28 +32,21 @@ export default function RegistrationPage() {
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
           onBlur={() => {
-            setPasswordError(validate("password", password));
+            setPasswordError(password !== "" ? "" : "Please enter a password");
           }}
           error={passwordError !== ""}
         />
         <Text style={styles.errorText}>{passwordError}</Text>
       </View>
-      <View style={styles.field}>
-        <TextInput
-          label="Re-type password"
-          value={rePassword}
-          textContentType="password"
-          secureTextEntry={true}
-          onChangeText={(text) => {
-            setRePassword(text);
-          }}
-          error={rePasswordError !== ""}
-        />
-        <Text style={styles.errorText}>{rePasswordError}</Text>
-      </View>
       <View style={styles.btn}>
-        <Button mode="contained">Register</Button>
+        <Button mode="contained">Login</Button>
       </View>
+      <Text
+        style={styles.newUserText}
+        onPress={() => navigation.navigate("Register")}
+      >
+        New user? Sing up now
+      </Text>
     </View>
   );
 }
@@ -83,6 +55,7 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     padding: 30,
+    marginTop: 100,
     // backgroundColor: "#fff",
     justifyContent: "center",
   },
@@ -97,5 +70,12 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: "red",
+  },
+  newUserText: {
+    marginTop: 20,
+    padding: 10,
+    textAlign: "center",
+    color: "purple",
+    fontSize: 15,
   },
 });
