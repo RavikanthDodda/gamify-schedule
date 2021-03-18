@@ -1,9 +1,9 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Profile from "./Pages/Profile";
-import Schedule from "./Pages/Schedule";
-import Store from "./Pages/Store";
-import Todo from "./Pages/Todo";
+import Profile from "../Pages/Profile";
+import Schedule from "../Pages/Schedule";
+import Store from "../Pages/Store";
+import Todo from "../Pages/Todo";
 
 import React from "react";
 
