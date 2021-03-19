@@ -33,25 +33,30 @@ function Schedule() {
   }, []);
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      {tasks.map((item) => (
-        <ScheduleItem
-          key={item.id}
-          item={item}
-          saveTask={updateTask}
-          deleteTask={deleteTask}
-        />
-      ))}
+    <React.Fragment>
+      <View style={styles.list}>
+        {tasks.map((item) => (
+          <ScheduleItem
+            key={item.id}
+            item={item}
+            saveTask={updateTask}
+            deleteTask={deleteTask}
+          />
+        ))}
+      </View>
       <FAB
         style={styles.fab}
         icon="plus"
         onPress={() => console.log("Pressed")}
       />
-    </View>
+    </React.Fragment>
   );
 }
 
 const styles = StyleSheet.create({
+  list: {
+    marginVertical: 40,
+  },
   fab: {
     position: "absolute",
     margin: 16,
