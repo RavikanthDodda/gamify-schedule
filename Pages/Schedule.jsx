@@ -1,24 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { FAB } from "react-native-paper";
 
 import ScheduleItem from "../components/ScheduleItem";
+import CustomerService from "../services/CustomerService";
 
 function Schedule() {
   const [tasks, setTasks] = useState([]);
 
-  const addTask = () => {
-    const newItems;
+  const loadTasks = async () => {
+    const data = await CustomerService.getScheduleTasks("ravi");
+    setTasks(data);
   };
+
+  const addTask = (item) => {
+    const newItems = [...tasks, item];
+    setTasks(newItems);
+  };
+
+  const updateTask = (item) => {
+    const newItems = [];
+    setTasks(newItems);
+  };
+
+  const deleteTask = (item) => {
+    const newItems = [];
+    setTasks(newItems);
+  };
+
   useEffect(() => {
-    const data = ScheduleService.getTasks();
-    setItems(data);
+    loadTasks();
   }, []);
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       {tasks.map((item) => (
-        <ScheduleItem item={item} />
+        <ScheduleItem
+          key={item.id}
+          item={item}
+          saveTask={updateTask}
+          deleteTask={deleteTask}
+        />
       ))}
       <FAB
         style={styles.fab}
@@ -28,6 +50,7 @@ function Schedule() {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   fab: {
     position: "absolute",

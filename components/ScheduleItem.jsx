@@ -2,12 +2,12 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Colors, List } from "react-native-paper";
 
-export default function SchduleItem(props) {
+export default function ScheduleItem(props) {
   return (
     <View style={styles.container}>
       <List.Item
-        title={props.title}
-        description={props.description}
+        title={"hello"}
+        description={"hello"}
         left={() => <List.Icon icon="checkbox-blank-outline" />}
         right={() => <List.Icon icon="delete" color={Colors.red400} />}
         style={styles.listItem}
