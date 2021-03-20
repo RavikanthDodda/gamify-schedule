@@ -4,14 +4,16 @@ import NavBar from "./components/NavBar";
 import { StyleSheet } from "react-native";
 import RegistrationPage from "./components/Pages/RegistrationPage";
 import { NavigationContainer } from "@react-navigation/native";
+import TodoForm from "./components/Forms/TodoForm";
 
 export default function App() {
   const [text, setText] = React.useState("");
 
   return (
-    <NavigationContainer>
-      <NavBar />
-    </NavigationContainer>
+    // <NavigationContainer>
+    //   <NavBar />
+    // </NavigationContainer>
+    <TodoForm/>
   );
 }
 
