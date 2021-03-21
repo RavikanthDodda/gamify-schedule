@@ -63,7 +63,7 @@ export default function TodoForm(){
           onChangeText={(description) => setDescription(description)}
         />
       </View>
-        <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined" style={styles.date}>
+        <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined" style={styles.dateButton}>
           Pick Date
         </Button>
         <DatePickerModal
@@ -75,13 +75,9 @@ export default function TodoForm(){
           validRange={{
             startDate: new Date(),
           }}
-          // onChange={} // same props as onConfirm but triggered without confirmed by user
-          // saveLabel="Save" // optional
-          // label="Select date" // optional
-          // animationType="slide" // optional, default is 'slide' on ios/android and 'none' on web
         />
         {showDate ? <Text style={styles.dateText}>Date: {Moment(date).format('MM-DD-YYYY')}</Text> : null}
-        <Button onPress={()=> setVisible(true)} uppercase={false} mode="outlined" style={styles.time}>
+        <Button onPress={()=> setVisible(true)} uppercase={false} mode="outlined" style={styles.timeButton}>
           Pick Time
         </Button>
         <TimePickerModal
@@ -90,8 +86,8 @@ export default function TodoForm(){
           onConfirm={onConfirm}
           // hours={12} // default: current hours
           // minutes={14} // default: current minutes
-          animationType="fade" // optional, default is 'none'
-          locale={'en'} // optional, default is automically detected by your system
+          animationType="fade"
+          locale={'en'}
         />
         {showTime ? <Text hide={false} style={styles.timeText}>Time: {hours}:{minutes}</Text> : null}
       <View style={styles.buttonParent}>
@@ -149,10 +145,10 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
   },
-  date:{
+  dateButton:{
     marginTop: 20,
   },
-  time:{
+  timeButton:{
     marginTop: 30,
   }
 });
