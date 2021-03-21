@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, TextInput } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import CustomerService from "../services/CustomerService";
@@ -13,8 +13,16 @@ export default function ScheduleTaskPage(props) {
       title: title,
       description: description,
     });
-    props.navigation.goBack();
+    props.navigation.navigate("Home", {
+      screen: "Schedule",
+      params: { action: "task added" },
+    });
   };
+
+  const deleteTask = () => {
+    CustomerService.deleteScheduleTask("ravi", 3);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.field}>
@@ -35,7 +43,9 @@ export default function ScheduleTaskPage(props) {
       </View>
       <View style={styles.buttonParent}>
         <View style={styles.btn1}>
-          <Button mode="contained">Delete</Button>
+          <Button mode="contained" onPress={deleteTask}>
+            Delete
+          </Button>
         </View>
         <View style={styles.btn2}>
           <Button mode="contained" onPress={saveTask}>

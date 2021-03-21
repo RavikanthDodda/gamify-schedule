@@ -1,11 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Colors, List } from "react-native-paper";
+import { ScrollView } from "react-native-gesture-handler";
+import { Colors, List, Card } from "react-native-paper";
 
 export default function ScheduleItem(props) {
   const { item } = props;
   return (
-    <View style={styles.container}>
+    <Card style={styles.container}>
       <List.Item
         title={item.title}
         description={item.description}
@@ -13,13 +14,13 @@ export default function ScheduleItem(props) {
         right={() => <List.Icon icon="delete" color={Colors.red400} />}
         style={styles.listItem}
       />
-    </View>
+    </Card>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 10,
+    marginHorizontal: 20,
     borderRadius: 8,
     marginTop: 10,
     backgroundColor: "#fff",
