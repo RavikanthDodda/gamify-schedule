@@ -8,7 +8,11 @@ function AddFAB(props) {
     <FAB
       style={styles.fab}
       icon="plus"
-      onPress={() => navigation.navigate(props.page)}
+      onPress={() =>
+        navigation.navigate(props.page, {
+          name: props.name,
+        })
+      }
     />
   );
 }

@@ -15,6 +15,7 @@ export default function MyTabs() {
         name="Todo"
         component={Todo}
         options={{
+          title: "Todo",
           tabBarLabel: "Todo",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
@@ -29,6 +30,7 @@ export default function MyTabs() {
         name="Schedule"
         component={Schedule}
         options={{
+          title: "Schedule",
           tabBarLabel: "Schedule",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="calendar" color={color} size={26} />
@@ -39,6 +41,7 @@ export default function MyTabs() {
         name="Store"
         component={Store}
         options={{
+          title: "Store",
           tabBarLabel: "Store",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="cart" color={color} size={26} />
@@ -49,6 +52,7 @@ export default function MyTabs() {
         name="Profile"
         component={Profile}
         options={{
+          title: "Account",
           tabBarLabel: "Profile",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />

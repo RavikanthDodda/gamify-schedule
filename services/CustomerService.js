@@ -1,31 +1,43 @@
 import tasks from "../data/ScheduleTasks";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { v4 as uuidv4 } from "uuid";
 
 class CustomerService {
-  async getScheduleTasks(userId) {
-    const key = userId + ".schedule.tasks";
+  constructor() {
+    this.userId = "ravi";
+    this.scheduleKey = this.userId + ".schedule.tasks";
+  }
+  async getScheduleTasks() {
     try {
-      const value = await AsyncStorage.getItem(key);
+      const value = await AsyncStorage.getItem(this.scheduleKey);
       return value != null ? JSON.parse(value) : null;
     } catch (e) {}
   }
-  async saveScheduleTask(userId, task) {
-    const key = userId + ".schedule.tasks";
-    console.log(key);
+  async saveScheduleTask(task) {
     try {
-      const oldValue = JSON.parse(await AsyncStorage.getItem(key));
-      const jsonValue = JSON.stringify([...oldValue, task]);
-      await AsyncStorage.setItem(key, jsonValue);
+      const oldValue = JSON.parse(await AsyncStorage.getItem(this.scheduleKey));
+      let jsonValue;
+      if (task.id) {
+        oldValue.forEach((element) => {
+          if (element.id === task.id) {
+            element = task;
+          }
+        });
+        jsonValue = oldValue;
+      } else {
+        task.id = uuidv4();
+        jsonValue = [...oldValue, task];
+      }
+      await AsyncStorage.setItem(this.scheduleKey, JSON.stringify(jsonValue));
     } catch (e) {}
   }
 
-  async deleteScheduleTask(userId, taskId) {
-    const key = userId + ".schedule.tasks";
+  async deleteScheduleTask(taskId) {
     try {
-      let data = JSON.parse(await AsyncStorage.getItem(key));
+      let data = JSON.parse(await AsyncStorage.getItem(this.scheduleKey));
       data = data.filter((item) => item.id != taskId);
       const jsonValue = JSON.stringify(data);
-      await AsyncStorage.setItem(key, jsonValue);
+      await AsyncStorage.setItem(this.scheduleKey, jsonValue);
     } catch (e) {}
   }
 
@@ -34,7 +46,7 @@ class CustomerService {
   async loadData() {
     try {
       const jsonValue = JSON.stringify(tasks);
-      await AsyncStorage.setItem("ravi.schedule.tasks", jsonValue);
+      await AsyncStorage.setItem(this.scheduleKey, jsonValue);
     } catch (e) {}
   }
 }

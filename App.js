@@ -18,7 +18,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={NavBar} />
-        <Stack.Screen name="Schedule-Task-Page" component={ScheduleTaskPage} />
+        <Stack.Screen options={({ route }) => ({ title: route.params.name })}  name="Schedule-Task-Page" component={ScheduleTaskPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

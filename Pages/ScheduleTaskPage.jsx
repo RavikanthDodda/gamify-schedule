@@ -4,12 +4,12 @@ import { StyleSheet, View } from "react-native";
 import CustomerService from "../services/CustomerService";
 
 export default function ScheduleTaskPage(props) {
-  const [title, setTitle] = React.useState("");
-  const [description, setDescription] = React.useState("");
+  const [title, setTitle] = useState(props.title || "");
+  const [description, setDescription] = useState(props.description || "");
 
   const saveTask = async () => {
-    await CustomerService.saveScheduleTask("ravi", {
-      id: 4,
+    await CustomerService.saveScheduleTask({
+      id: props.id,
       title: title,
       description: description,
     });
@@ -19,9 +19,7 @@ export default function ScheduleTaskPage(props) {
     });
   };
 
-  const deleteTask = () => {
-    CustomerService.deleteScheduleTask("ravi", 3);
-  };
+  const deleteTask = () => {};
 
   return (
     <View style={styles.container}>
