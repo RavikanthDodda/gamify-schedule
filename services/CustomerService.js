@@ -9,20 +9,27 @@ class CustomerService {
       return value != null ? JSON.parse(value) : null;
     } catch (e) {}
   }
-
-  async saveScheduleTasks(userId, tasks) {
-    const key = userId + "schedule.tasks";
+  async saveScheduleTask(userId, task) {
+    const key = userId + ".schedule.tasks";
+    console.log(key);
     try {
-      const jsonValue = JSON.stringify(tasks);
+      const oldValue = JSON.parse(await AsyncStorage.getItem(key));
+      const jsonValue = JSON.stringify([...oldValue, task]);
+      await AsyncStorage.setItem(key, jsonValue);
+    } catch (e) {}
+  }
+
+  async deleteScheduleTask(userId, taskId) {
+    const key = userId + ".schedule.tasks";
+    try {
+      let data = JSON.parse(await AsyncStorage.getItem(key));
+      data = data.filter((item) => item.id != taskId);
+      const jsonValue = JSON.stringify(data);
       await AsyncStorage.setItem(key, jsonValue);
     } catch (e) {}
   }
 
   async getTodoTasks() {}
-
-  saveTodoTasks() {}
-
-  getUserName() {}
 
   async loadData() {
     try {
