@@ -1,37 +1,108 @@
 import React from "react";
 import { Button, TextInput } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
+import { DatePickerModal } from 'react-native-paper-dates';
+import { TimePickerModal } from 'react-native-paper-dates';
+import Moment from 'moment';
 
-export default function LoginPage(){
+export default function TodoForm(){
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [date, setDate] = React.useState(undefined);
+  const [open, setOpen] = React.useState(false);
+  const [visible, setVisible] = React.useState(false);
+  const [hours, setHours] = React.useState("-");
+  const [minutes, setMinutes] = React.useState("-");
+  const [showDate, setShowDate] = React.useState(false);
+  const [showTime, setShowTime] = React.useState(false);
+
+  const onDismissSingle = React.useCallback(() => {
+    setOpen(false);
+  }, [setOpen]);
+
+  const onConfirmSingle = React.useCallback(
+    (params) => {
+      setOpen(false);
+      setDate(params.date);
+      setShowDate(true);
+      console.log(params.date);
+    },
+    [setOpen, setDate]
+  );
+  const onDismiss = React.useCallback(() => {
+    setVisible(false)
+  }, [setVisible])
+
+  const onConfirm = React.useCallback(
+    ({ hours, minutes }) => {
+      setVisible(false);
+      setHours(hours);
+      setMinutes(minutes);
+      setShowTime(true);
+      console.log({ hours, minutes });
+    },
+    [setVisible]
+  );
   return (
     <View style={styles.container}>
-    <View style={styles.field}>
-      <TextInput
-        label="Title"
-        value={title}
-        textContentType="jobTitle"
-        onChangeText={(title) => setTitle(title)}
-      />
+      <Text style={styles.header}>New Task</Text>
+      <View style={styles.field}>
+        <TextInput
+          label="Title"
+          value={title}
+          textContentType="jobTitle"
+          onChangeText={(title) => setTitle(title)}
+        />
+      </View>
+      <View style={styles.field}>
+        <TextInput
+          label="Description"
+          value={description}
+          multiline={true}
+          textContentType="fullStreetAddress"
+          onChangeText={(description) => setDescription(description)}
+        />
+      </View>
+        <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined" style={styles.date}>
+          Pick Date
+        </Button>
+        <DatePickerModal
+          mode="single"
+          visible={open}
+          onDismiss={onDismissSingle}
+          date={date}
+          onConfirm={onConfirmSingle}
+          validRange={{
+            startDate: new Date(),
+          }}
+          // onChange={} // same props as onConfirm but triggered without confirmed by user
+          // saveLabel="Save" // optional
+          // label="Select date" // optional
+          // animationType="slide" // optional, default is 'slide' on ios/android and 'none' on web
+        />
+        {showDate ? <Text style={styles.dateText}>Date: {Moment(date).format('MM-DD-YYYY')}</Text> : null}
+        <Button onPress={()=> setVisible(true)} uppercase={false} mode="outlined" style={styles.time}>
+          Pick Time
+        </Button>
+        <TimePickerModal
+          visible={visible}
+          onDismiss={onDismiss}
+          onConfirm={onConfirm}
+          // hours={12} // default: current hours
+          // minutes={14} // default: current minutes
+          animationType="fade" // optional, default is 'none'
+          locale={'en'} // optional, default is automically detected by your system
+        />
+        {showTime ? <Text hide={false} style={styles.timeText}>Time: {hours}:{minutes}</Text> : null}
+      <View style={styles.buttonParent}>
+        <View style={styles.btn1}>
+          <Button mode="contained">Delete</Button>
+        </View>
+        <View style={styles.btn2}>
+          <Button mode="contained">Save</Button>
+        </View>
+      </View>
     </View>
-    <View style={styles.field}>
-      <TextInput
-        label="Description"
-        value={description}
-        textContentType="fullStreetAddress"
-        onChangeText={(description) => setDescription(description)}
-      />
-    </View>
-    <View style={styles.buttonParent}>
-    <View style={styles.btn1}>
-      <Button mode="contained">Delete</Button>
-    </View>
-    <View style={styles.btn2}>
-      <Button mode="contained">Save</Button>
-    </View>
-    </View>
-  </View>
   );
 }
 
@@ -39,8 +110,27 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     padding: 30,
-    marginTop: 100,
+    marginTop: 50,
     justifyContent: "center",
+  },
+  header: {
+    textAlign: "center",
+    justifyContent: "center", 
+    marginBottom: 40,
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  dateText:{
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginTop: 5,
+    textAlign: "center",
+  },
+  timeText:{
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginTop: 5,
+    textAlign: "center",
   },
   field: {
     marginBottom: 10,
@@ -48,7 +138,7 @@ const styles = StyleSheet.create({
   buttonParent:{
     flexDirection: 'row',
     justifyContent: "center",
-    marginTop: 20
+    marginTop: 80
   },
   btn1: {
     display: "flex",
@@ -59,4 +149,10 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
   },
+  date:{
+    marginTop: 20,
+  },
+  time:{
+    marginTop: 30,
+  }
 });
