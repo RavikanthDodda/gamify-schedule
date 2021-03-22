@@ -1,23 +1,24 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { StyleSheet } from "react-native";
 import { Colors, List, Card } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ScheduleItem(props) {
-  const { item, navigation } = props;
+  const { item } = props.item;
+
   return (
     <Card style={styles.container}>
       <List.Item
         title={item.title}
         description={item.description}
         left={() => <List.Icon icon="checkbox-blank-outline" />}
-        right={() => <List.Icon icon="delete" color={Colors.red400} />}
-        // onPress={() =>
-        //   navigation.navigate("Schedule-Task-Page", {
-        //     name: "Edit task",
-        //     taskId: item.id,
-        //   })
-        // }
+        // right={() => <List.Icon icon="delete" color={Colors.red400} />}
+        onPress={() => {
+          props.navigation.navigate("Schedule-Task-Page", {
+            name: "Edit task",
+            taskId: item.id,
+          });
+        }}
         style={styles.listItem}
       />
     </Card>

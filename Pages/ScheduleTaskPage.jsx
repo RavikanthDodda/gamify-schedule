@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, TextInput } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import CustomerService from "../services/CustomerService";
 
 export default function ScheduleTaskPage(props) {
-  const [title, setTitle] = useState(props.title || "");
-  const [description, setDescription] = useState(props.description || "");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const loadTasks = async () => {
+    const data = await CustomerService.getScheduleTask(
+      props.route.params?.taskId
+    );
+    if (data) {
+      setTitle(data.title);
+      setDescription(data.description);
+    }
+  };
+
+  useEffect(() => {
+    loadTasks();
+    // notify();
+  }, []);
 
   const saveTask = async () => {
     await CustomerService.saveScheduleTask({
@@ -19,7 +33,15 @@ export default function ScheduleTaskPage(props) {
     });
   };
 
-  const deleteTask = () => {};
+  const deleteTask = async () => {
+    const res = await CustomerService.deleteScheduleTask(
+      props.route.params?.taskId
+    );
+    props.navigation.navigate("Home", {
+      screen: "Schedule",
+      params: { action: "task added" },
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -42,7 +64,7 @@ export default function ScheduleTaskPage(props) {
       <View style={styles.buttonParent}>
         <View style={styles.btn1}>
           <Button mode="contained" onPress={deleteTask}>
-            Delete
+            {props.route.params?.taskId ? "Delete" : "Cancel"}
           </Button>
         </View>
         <View style={styles.btn2}>

@@ -1,7 +1,7 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Profile from "../Pages/Profile";
-import Schedule from "../Pages/Schedule";
+import ItemList from "../Pages/ItemList";
 import Store from "../Pages/Store";
 import Todo from "../Pages/Todo";
 
@@ -13,7 +13,8 @@ export default function MyTabs() {
     <Tab.Navigator>
       <Tab.Screen
         name="Todo"
-        component={Todo}
+        component={ItemList}
+        initialParams={{ item: "todo" }}
         options={{
           title: "Todo",
           tabBarLabel: "Todo",
@@ -28,7 +29,8 @@ export default function MyTabs() {
       />
       <Tab.Screen
         name="Schedule"
-        component={Schedule}
+        component={ItemList}
+        initialParams={{ item: "schedule" }}
         options={{
           title: "Schedule",
           tabBarLabel: "Schedule",
@@ -65,7 +67,7 @@ export default function MyTabs() {
 // export default createMaterialBottomTabNavigator(
 //   {
 //     Todo: { screen: Todo },
-//     Schedule: { screen: Schedule },
+//     ItemList: { screen: ItemList },
 //     Store: { screen: Store },
 //     Profile: { screen: Profile },
 //   },

@@ -6,7 +6,8 @@ import AddFAB from "../components/AddFAB";
 import ScheduleItem from "../components/ScheduleItem";
 import CustomerService from "../services/CustomerService";
 
-function Schedule({ route, navigation }) {
+function ItemList(props) {
+  const { route, navigation } = props;
   const [tasks, setTasks] = useState([]);
   // const [showBar, setShowBar] = useState(false);
   // let message = "";
@@ -19,7 +20,18 @@ function Schedule({ route, navigation }) {
   // };
 
   const loadTasks = async () => {
-    const data = await CustomerService.getScheduleTasks();
+    let data;
+    switch (route.params?.item) {
+      case "schedule":
+        data = await CustomerService.getScheduleTasks();
+        break;
+
+      case "todo":
+        data = await CustomerService.getTodoTasks();
+        break;
+      default:
+        break;
+    }
     setTasks(data);
   };
 
@@ -28,6 +40,7 @@ function Schedule({ route, navigation }) {
       loadTasks();
       // notify();
     });
+
     return unsubscribe;
   }, [navigation]);
 
@@ -35,8 +48,15 @@ function Schedule({ route, navigation }) {
     <React.Fragment>
       <FlatList
         data={tasks}
-        renderItem={ScheduleItem}
-        keyExtractor={(task) => String(task.id)}
+        renderItem={(item) => (
+          <ScheduleItem
+            item={item}
+            navigation={navigation}
+            type={route.params?.item}
+          />
+        )}
+        keyExtractor={(task) => task.id}
+        extraData={props.navigation}
       />
       <AddFAB
         navigation={navigation}
@@ -59,4 +79,4 @@ function Schedule({ route, navigation }) {
   );
 }
 
-export default Schedule;
+export default ItemList;
