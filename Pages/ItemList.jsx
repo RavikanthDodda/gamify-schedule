@@ -3,7 +3,7 @@ import { FlatList } from "react-native-gesture-handler";
 import { Snackbar } from "react-native-paper";
 import AddFAB from "../components/AddFAB";
 
-import ScheduleItem from "../components/ScheduleItem";
+import Item from "../components/Item";
 import CustomerService from "../services/CustomerService";
 
 function ItemList(props) {
@@ -49,11 +49,7 @@ function ItemList(props) {
       <FlatList
         data={tasks}
         renderItem={(item) => (
-          <ScheduleItem
-            item={item}
-            navigation={navigation}
-            type={route.params?.item}
-          />
+          <Item item={item} navigation={navigation} type={route.params?.item} />
         )}
         keyExtractor={(task) => task.id}
         extraData={props.navigation}

@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Colors, List, Card } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import { List, Card } from "react-native-paper";
 
-export default function ScheduleItem(props) {
+export default function ListItem(props) {
   const { item } = props.item;
 
   return (
