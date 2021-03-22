@@ -3,6 +3,8 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Profile from "./Pages/Profile";
 import Schedule from "./Pages/Schedule";
 import Store from "./Pages/Store";
+import PurchaseCoupon from "./Pages/PurchaseCoupon";
+import UserCouponsPage from "./Pages/UserCouponsPage";
 import Todo from "./Pages/Todo";
 
 import React from "react";
@@ -37,7 +39,7 @@ export default function MyTabs() {
       />
       <Tab.Screen
         name="Store"
-        component={Store}
+        component={UserCouponsPage}
         options={{
           tabBarLabel: "Store",
           tabBarIcon: ({ color }) => (

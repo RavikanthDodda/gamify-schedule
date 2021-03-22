@@ -4,21 +4,6 @@ import {FlatList,TouchableOpacity,ScrollView} from "react-native";
 
 import { StyleSheet, Text, View } from "react-native";
 
-const RecipieData = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-  },
-];
-
 function Store({ navigation }) {
   return (
     <View >
@@ -61,7 +46,7 @@ function Store({ navigation }) {
         title="Coupons"
         description="Browse all coupons"
         style={styles.containerListItem}
-        onPress={() => navigation.navigate("Register")}
+        onPress={() => navigation.navigate("userCouponsPage")}
         />
         <List.Item
         title="Offers"
