@@ -2,7 +2,7 @@ import React from "react";
 import { Button, TextInput } from "react-native-paper";
 
 import { StyleSheet, Text, View } from "react-native";
-import validate from "../../utils/validation_wrapper";
+import validate from "../utils/validation_wrapper";
 
 // TODO - on submit handler and check re typed password
 export default function RegistrationPage() {
