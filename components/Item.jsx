@@ -13,7 +13,7 @@ export default function ListItem(props) {
         left={() => <List.Icon icon="checkbox-blank-outline" />}
         // right={() => <List.Icon icon="delete" color={Colors.red400} />}
         onPress={() => {
-          props.navigation.navigate("Schedule-Task-Page", {
+          props.navigation.navigate(props.page, {
             name: "Edit task",
             taskId: item.id,
           });

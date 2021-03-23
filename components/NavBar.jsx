@@ -3,18 +3,17 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Profile from "../Pages/Profile";
 import ItemList from "../Pages/ItemList";
 import Store from "../Pages/Store";
-import Todo from "../Pages/Todo";
 
 import React from "react";
 
 const Tab = createMaterialBottomTabNavigator();
 export default function MyTabs() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator barStyle={{ backgroundColor: "#6200EE" }}>
       <Tab.Screen
         name="Todo"
         component={ItemList}
-        initialParams={{ item: "todo" }}
+        initialParams={{ item: "todo", formPage: "Todo-Task-Page" }}
         options={{
           title: "Todo",
           tabBarLabel: "Todo",
@@ -30,7 +29,7 @@ export default function MyTabs() {
       <Tab.Screen
         name="Schedule"
         component={ItemList}
-        initialParams={{ item: "schedule" }}
+        initialParams={{ item: "schedule", formPage: "Schedule-Task-Page" }}
         options={{
           title: "Schedule",
           tabBarLabel: "Schedule",

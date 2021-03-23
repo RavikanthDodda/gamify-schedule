@@ -3,14 +3,12 @@ import { Button, TextInput } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import CustomerService from "../services/CustomerService";
 
-export default function ScheduleTaskPage(props) {
+export default function TodoTaskPage(props) {
   const [id, setId] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const loadTasks = async () => {
-    const data = await CustomerService.getScheduleTask(
-      props.route.params?.taskId
-    );
+    const data = await CustomerService.getTodoTask(props.route.params?.taskId);
     if (data) {
       setId(data.id);
       setTitle(data.title);
@@ -24,23 +22,23 @@ export default function ScheduleTaskPage(props) {
   }, []);
 
   const saveTask = async () => {
-    await CustomerService.saveScheduleTask({
+    await CustomerService.saveTodoTask({
       id: id,
       title: title,
       description: description,
     });
     props.navigation.navigate("Home", {
-      screen: "Schedule",
+      screen: "Todo",
       params: { action: "task added" },
     });
   };
 
   const deleteTask = async () => {
-    const res = await CustomerService.deleteScheduleTask(
+    const res = await CustomerService.deleteTodoTask(
       props.route.params?.taskId
     );
     props.navigation.navigate("Home", {
-      screen: "Schedule",
+      screen: "Todo",
       params: { action: "task added" },
     });
   };

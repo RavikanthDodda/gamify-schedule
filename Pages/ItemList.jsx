@@ -49,14 +49,18 @@ function ItemList(props) {
       <FlatList
         data={tasks}
         renderItem={(item) => (
-          <Item item={item} navigation={navigation} type={route.params?.item} />
+          <Item
+            item={item}
+            navigation={navigation}
+            type={route.params.item}
+            page={route.params.formPage}
+          />
         )}
         keyExtractor={(task) => task.id}
-        extraData={props.navigation}
       />
       <AddFAB
         navigation={navigation}
-        page={"Schedule-Task-Page"}
+        page={route.params.formPage}
         name={"Add new task"}
       />
       {/* <Snackbar

@@ -32,7 +32,8 @@ class CustomerService {
       if (task.id) {
         oldValue.forEach((element) => {
           if (element.id === task.id) {
-            element = task;
+            element.title = task.title;
+            element.description = task.description;
           }
         });
         jsonValue = oldValue;
@@ -60,14 +61,22 @@ class CustomerService {
     } catch (e) {}
   }
 
+  async getTodoTask(taskId) {
+    try {
+      let data = JSON.parse(await AsyncStorage.getItem(this.todoKey));
+      data = data.filter((item) => item.id === taskId);
+      return data[0];
+    } catch (e) {}
+  }
   async saveTodoTask(task) {
     try {
       const oldValue = JSON.parse(await AsyncStorage.getItem(this.todoKey));
       let jsonValue;
-      if (task.id) {
+      if (task.id !== undefined) {
         oldValue.forEach((element) => {
           if (element.id === task.id) {
-            element = task;
+            element.title = task.title;
+            element.description = task.description;
           }
         });
         jsonValue = oldValue;
@@ -76,6 +85,15 @@ class CustomerService {
         jsonValue = [...oldValue, task];
       }
       await AsyncStorage.setItem(this.todoKey, JSON.stringify(jsonValue));
+    } catch (e) {}
+  }
+
+  async deleteTodoTask(taskId) {
+    try {
+      let data = JSON.parse(await AsyncStorage.getItem(this.todoKey));
+      data = data.filter((item) => item.id !== taskId);
+      const jsonValue = JSON.stringify(data);
+      await AsyncStorage.setItem(this.todoKey, jsonValue);
     } catch (e) {}
   }
 

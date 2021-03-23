@@ -11,7 +11,7 @@ export default [
   {
     id: "6",
     title: "Todo 2",
-    description: "this is task 1",
+    description: "this is task 2",
     difficulty: "Low",
     due: "xxxxxx",
     "Repeat on": ["sunday"],
