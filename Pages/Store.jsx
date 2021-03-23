@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar, Button, Card, Title, Paragraph, Colors, List  } from 'react-native-paper';
 import {FlatList,TouchableOpacity,ScrollView,Alert} from "react-native";
+import { IMAGENAME } from '../assets/amazon.png';
 
 import { StyleSheet, Text, View } from "react-native";
 
@@ -14,13 +15,13 @@ function Store({ navigation }) {
         <TouchableOpacity
                      onPress = {() => Alert.alert("GET pressed")}>
                      <Card style={styles.card}>
-                        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+                        <Card.Cover source={require('../assets/amazon1.png')} />
                       </Card>
         </TouchableOpacity>
         <TouchableOpacity
                      onPress = {() => Alert.alert("GET pressed")}>
                      <Card style={styles.card}>
-                        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+                        <Card.Cover source={require('../assets/walmart.png')} />
                       </Card>
         </TouchableOpacity>
         </View>
@@ -28,13 +29,13 @@ function Store({ navigation }) {
         <TouchableOpacity
                      onPress = {() => Alert.alert("GET pressed")}>
                      <Card style={styles.card}>
-                        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+                        <Card.Cover source={require('../assets/costco.png')} />
                       </Card>
         </TouchableOpacity>
         <TouchableOpacity
                      onPress = {() => Alert.alert("GET pressed")}>
                      <Card style={styles.card}>
-                        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+                        <Card.Cover source={require('../assets/prime.png')} />
                       </Card>
         </TouchableOpacity>
         </View>
