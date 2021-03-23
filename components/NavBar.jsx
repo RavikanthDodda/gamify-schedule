@@ -1,5 +1,6 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 import Profile from "../Pages/Profile";
 import ItemList from "../Pages/ItemList";
 import Store from "../Pages/Store";
