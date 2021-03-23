@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View , Alert} from "react-native";
 import UserCoupon from '../UserCoupon'
 import UserCouponsService from "../../services/UserCouponsService";
 

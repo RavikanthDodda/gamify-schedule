@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, Button, Card, Title, Paragraph, Colors, List  } from 'react-native-paper';
-import {FlatList,TouchableOpacity,ScrollView} from "react-native";
+import {FlatList,TouchableOpacity,ScrollView,Alert} from "react-native";
 
 import { StyleSheet, Text, View } from "react-native";
 
@@ -12,27 +12,27 @@ function Store({ navigation }) {
         <Text style={styles.featuredText}>Featured</Text>
         <View style={styles.row1}>
         <TouchableOpacity
-                     onPress = {() => this.alertItemName(item)}>
+                     onPress = {() => Alert.alert("GET pressed")}>
                      <Card style={styles.card}>
                         <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
                       </Card>
         </TouchableOpacity>
         <TouchableOpacity
-                     onPress = {() => this.alertItemName(item)}>
+                     onPress = {() => Alert.alert("GET pressed")}>
                      <Card style={styles.card}>
                         <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
                       </Card>
         </TouchableOpacity>
         </View>
-        <View style={styles.row2}>
+        <View style={styles.row1}>
         <TouchableOpacity
-                     onPress = {() => this.alertItemName(item)}>
+                     onPress = {() => Alert.alert("GET pressed")}>
                      <Card style={styles.card}>
                         <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
                       </Card>
         </TouchableOpacity>
         <TouchableOpacity
-                     onPress = {() => this.alertItemName(item)}>
+                     onPress = {() => Alert.alert("GET pressed")}>
                      <Card style={styles.card}>
                         <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
                       </Card>
@@ -65,10 +65,6 @@ export default Store;
 
 const styles = StyleSheet.create({
   row1:{
-    flexDirection:"row",
-    padding:20,
-  },
-  row2:{
     flexDirection:"row",
     padding:20,
   },

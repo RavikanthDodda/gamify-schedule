@@ -39,7 +39,7 @@ export default function MyTabs() {
       />
       <Tab.Screen
         name="Store"
-        component={UserCouponsPage}
+        component={Store}
         options={{
           tabBarLabel: "Store",
           tabBarIcon: ({ color }) => (
