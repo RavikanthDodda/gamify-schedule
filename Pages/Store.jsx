@@ -47,13 +47,19 @@ function Store({ navigation }) {
         title="Coupons"
         description="Browse all coupons"
         style={styles.containerListItem}
-        onPress={() => navigation.navigate("userCouponsPage")}
+        onPress={() => navigation.navigate("User-Coupons-Page", {
+          screen: "Coupons List",
+          params: { action: "view coupons" },
+        })}
         />
         <List.Item
         title="Offers"
         description="Browse all offers"
         style={styles.containerListItem}
-        onPress={() => navigation.navigate("Register")}
+        onPress={() => navigation.navigate("User-Coupons-Page", {
+          screen: "Coupons List",
+          params: { action: "view coupons" },
+        })}
         />
         </View>
       </ScrollView>

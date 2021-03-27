@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View , Alert} from "react-native";
-import UserCoupon from '../UserCoupon'
-import UserCouponsService from "../../services/UserCouponsService";
+import UserCoupon from '../components/UserCoupon'
+import UserCouponsService from "../services/UserCouponsService";
 
 function UserCouponsPage({navigation}) {
   const [coupons, setCoupons] = useState([]);

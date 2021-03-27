@@ -7,6 +7,8 @@ import CustomerService from "./services/CustomerService";
 import { createStackNavigator } from "@react-navigation/stack";
 import ScheduleTaskPage from "./Pages/ScheduleTaskPage";
 import TodoTaskPage from "./Pages/TodoTaskPage";
+import StorePage from "./Pages/Store"
+import UserCouponsPage from "./Pages/UserCouponsPage"
 
 export default function App() {
   useEffect(() => {
@@ -28,6 +30,16 @@ export default function App() {
           options={({ route }) => ({ title: route.params.name })}
           name="Todo-Task-Page"
           component={TodoTaskPage}
+        />
+        <Stack.Screen
+          options={({ route }) => ({ title: route.params.name })}
+          name="Store-Page"
+          component={StorePage}
+        />
+        <Stack.Screen
+          options={({ route }) => ({ title: route.params.name })}
+          name="User-Coupons-Page"
+          component={UserCouponsPage}
         />
       </Stack.Navigator>
     </NavigationContainer>
