@@ -13,7 +13,10 @@ function Store({ navigation }) {
         <Text style={styles.featuredText}>Featured</Text>
         <View style={styles.row1}>
         <TouchableOpacity
-                     onPress = {() => Alert.alert("GET pressed")}>
+                     onPress={() => navigation.navigate("Purchase-Coupon", {
+                      screen: "Coupons",
+                      params: { action: "view coupon" },
+                    })}>
                      <Card style={styles.card}>
                         <Card.Cover source={require('../assets/amazon1.png')} />
                       </Card>

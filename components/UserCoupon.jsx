@@ -3,16 +3,19 @@ import { Alert, StyleSheet, Text, View } from "react-native";
 import { Colors, List } from "react-native-paper";
 
 export default function UserCoupon(props) {
+  let cost = props.cost
+  let expiry = props.expiry
   return (
     <View style={styles.container}>
       <List.Item
         title={props.title}
         description={props.description}
-        right={(props) => (
+        right={() => (
         <View>
           <Text style={styles.text}
-          onPress = {() => Alert.alert("GET pressed")}>GET</Text>
-          <Text>{props.description} points</Text>
+          onPress = {() => Alert.alert("GET pressed")}>GET COUPON</Text>
+          <Text>Points: {cost}</Text>
+          <Text>Valid till: {expiry}</Text>
         </View>
         )}
         style={styles.listItem}
@@ -35,7 +38,8 @@ const styles = StyleSheet.create({
     // backgroundColor: "lightblue",
   },
   text:{
-    fontWeight:"bold", 
+    fontWeight:"bold",
+    color:"blue",
     padding:10
   }
 });

@@ -1,36 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View , Alert} from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import UserCoupon from '../components/UserCoupon'
 import UserCouponsService from "../services/UserCouponsService";
 
 function UserCouponsPage({navigation}) {
   const [coupons, setCoupons] = useState([]);
 
-  const loadTasks =  () => {
-    const data = UserCouponsService.getCoupons();
+  const loadCoupons = () => {
+    let data = UserCouponsService.getCoupons();
     console.log("-------");
     console.log(data);
-    setCoupons(data);
+    setCoupons(UserCouponsService.getCoupons());
     console.log(coupons);
   };
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      loadTasks();
-    });
-    return unsubscribe;
-  }, [navigation]);
 
-  return (
+  useEffect(() => {
+     loadCoupons();
+  }, []);
+    return (
     <View>
       <Text style={styles.header}>Coupons</Text>
-      {/* {coupons.forEach(element => {
-         <UserCoupon title={element.id} description='Get 50% off on fashion'/>
-      })}   */}
-      <UserCoupon title='Amazon' description='Get 50% off on fashion'/>
-      <UserCoupon title='New Egg' description='Get 30% off on laptops'/>
+      <FlatList
+        data={coupons}
+        renderItem={item => 
+          <UserCoupon item={item.item} title={item.item.title} description={item.item.description} cost={item.item.cost} expiry={item.item.expiry}/>
+        }
+      />
     </View>
   );
-}
+} 
 
 const styles = StyleSheet.create({
   header: {
