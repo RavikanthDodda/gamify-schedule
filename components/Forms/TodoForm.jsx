@@ -1,9 +1,12 @@
 import React from "react";
 import { Button, TextInput } from "react-native-paper";
-import { StyleSheet, Text, View } from "react-native";
-import { DatePickerModal } from 'react-native-paper-dates';
-import { TimePickerModal } from 'react-native-paper-dates';
-import Moment from 'moment';
+import { StyleSheet, Text, View, } from "react-native";
+import {Picker} from "@react-native-community/picker"
+import { DatePickerModal } from "react-native-paper-dates";
+import { TimePickerModal } from "react-native-paper-dates";
+import Moment from "moment";
+import "intl";
+import "intl/locale-data/jsonp/en";
 
 export default function TodoForm(){
   const [title, setTitle] = React.useState("");
@@ -15,6 +18,7 @@ export default function TodoForm(){
   const [minutes, setMinutes] = React.useState("-");
   const [showDate, setShowDate] = React.useState(false);
   const [showTime, setShowTime] = React.useState(false);
+  const [difficulty, setDifficulty] = React.useState("");
 
   const onDismissSingle = React.useCallback(() => {
     setOpen(false);
@@ -25,7 +29,6 @@ export default function TodoForm(){
       setOpen(false);
       setDate(params.date);
       setShowDate(true);
-      console.log(params.date);
     },
     [setOpen, setDate]
   );
@@ -39,13 +42,13 @@ export default function TodoForm(){
       setHours(hours);
       setMinutes(minutes);
       setShowTime(true);
-      console.log({ hours, minutes });
     },
     [setVisible]
   );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>New Task</Text>
+      <Text style={styles.header}>New to do</Text>
       <View style={styles.field}>
         <TextInput
           label="Title"
@@ -54,7 +57,7 @@ export default function TodoForm(){
           onChangeText={(title) => setTitle(title)}
         />
       </View>
-      <View style={styles.field}>
+      <View style={styles.field, {marginTop:20}}>
         <TextInput
           label="Description"
           value={description}
@@ -63,36 +66,54 @@ export default function TodoForm(){
           onChangeText={(description) => setDescription(description)}
         />
       </View>
-        <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined" style={styles.dateButton}>
-          Pick Date
-        </Button>
-        <DatePickerModal
-          mode="single"
-          visible={open}
-          onDismiss={onDismissSingle}
-          date={date}
-          onConfirm={onConfirmSingle}
-          validRange={{
-            startDate: new Date(),
-          }}
-        />
-        {showDate ? <Text style={styles.dateText}>Date: {Moment(date).format('MM-DD-YYYY')}</Text> : null}
-        <Button onPress={()=> setVisible(true)} uppercase={false} mode="outlined" style={styles.timeButton}>
-          Pick Time
-        </Button>
-        <TimePickerModal
-          visible={visible}
-          onDismiss={onDismiss}
-          onConfirm={onConfirm}
-          // hours={12} // default: current hours
-          // minutes={14} // default: current minutes
-          animationType="fade"
-          locale={'en'}
-        />
-        {showTime ? <Text hide={false} style={styles.timeText}>Time: {hours}:{minutes}</Text> : null}
+        <View style={styles.dateModalButton}>
+          <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined" style={styles.dateButton}>
+            Select Due Date
+          </Button>
+          <DatePickerModal
+            mode="single"
+            visible={open}
+            onDismiss={onDismissSingle}
+            date={date}
+            onConfirm={onConfirmSingle}
+            validRange={{
+              startDate: new Date(),
+            }}
+          />
+          {showDate ? <Text style={styles.dateText}>     {Moment(date).format('MM-DD-YYYY')}</Text> : null}
+        </View>
+        <View style={styles.TimeModalButton}>
+          <Button onPress={()=> setVisible(true)} uppercase={false} mode="outlined" style={styles.timeButton}>
+            Select Due Time
+          </Button>
+          <TimePickerModal
+            visible={visible}
+            onDismiss={onDismiss}
+            onConfirm={onConfirm}
+            // hours={12} // default: current hours
+            // minutes={14} // default: current minutes
+            animationType="fade"
+            locale={'en'}
+          />
+          {showTime ? <Text hide={false} style={styles.timeText}>     {hours}:{minutes}</Text> : null}
+        </View>
+        <View style={styles.pickerButton}>
+          <Button uppercase={false} style={styles.difficultyText}>
+            Select Difficulty
+          </Button>
+          <Picker
+            selectedValue={difficulty}
+            onValueChange={(difficulty) => setDifficulty(difficulty)}
+            style={{ width: 140}}
+            mode="dropdown">
+            <Picker.Item label="Easy" value="Easy" />
+            <Picker.Item label="Medium" value="Medium" />
+            <Picker.Item label="Hard" value="Hard" />
+          </Picker>
+      </View>
       <View style={styles.buttonParent}>
         <View style={styles.btn1}>
-          <Button mode="contained">Delete</Button>
+          <Button mode="contained">Cancel</Button>
         </View>
         <View style={styles.btn2}>
           <Button mode="contained">Save</Button>
@@ -119,13 +140,13 @@ const styles = StyleSheet.create({
   dateText:{
     fontWeight: 'bold',
     fontSize: 15,
-    marginTop: 5,
+    marginTop: 50,
     textAlign: "center",
   },
   timeText:{
     fontWeight: 'bold',
     fontSize: 15,
-    marginTop: 5,
+    marginTop: 50,
     textAlign: "center",
   },
   field: {
@@ -146,9 +167,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   dateButton:{
-    marginTop: 20,
+    marginTop: 40,
+    width: 200
   },
   timeButton:{
-    marginTop: 30,
-  }
+    marginTop: 40,
+    width: 200
+  },
+  difficultyText:{
+    marginTop: 60,
+    width: 200
+  },
+  menuItem:{
+    height: 25
+  },
+  dateModalButton:{
+    flexDirection: 'row',
+  },
+  TimeModalButton:{
+    flexDirection: 'row',
+  },
+  pickerButton:{
+    flexDirection: 'row',
+  },
+  menuDifficultyButton:{
+    marginTop: 40,
+    width: 200
+  },
 });
