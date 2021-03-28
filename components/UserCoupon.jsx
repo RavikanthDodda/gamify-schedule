@@ -1,22 +1,27 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import { Colors, List } from "react-native-paper";
 
-export default function TodoItem(props) {
+export default function UserCoupon(props) {
   return (
     <View style={styles.container}>
       <List.Item
         title={props.title}
         description={props.description}
-        left={(props) => <List.Icon {...props} icon="checkbox-blank-outline" />}
         right={(props) => (
-          <List.Icon {...props} icon="delete" color={Colors.red400} />
+        <View>
+          <Text style={styles.text}
+          onPress = {() => Alert.alert("GET pressed")}>GET</Text>
+          <Text>{props.description} points</Text>
+        </View>
         )}
         style={styles.listItem}
       />
     </View>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -29,4 +34,8 @@ const styles = StyleSheet.create({
   listItem: {
     // backgroundColor: "lightblue",
   },
+  text:{
+    fontWeight:"bold", 
+    padding:10
+  }
 });
