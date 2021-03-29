@@ -73,18 +73,13 @@ export default function TodoForm() {
         <Title style={{ fontSize: 17, marginTop: 20 }}>Due date and time</Title>
         <View style={styles.picker}>
           <View>
-            <TouchableOpacity
-              style={styles.dateButton}
-              onPress={() => setOpen(true)}
-            >
-              <Button style={{ width: 140 }}>
+              <Button mode="outlined" style={{ width: 140 }} onPress={() => setOpen(true)} style={styles.dateButton}>
                   {
                     date
                       ? Moment(date).format("MM-DD-YYYY")
                       : Moment().format("MM-DD-YYYY")
                   }
               </Button>
-            </TouchableOpacity>
             <DatePickerModal
               mode="single"
               visible={open}
@@ -97,18 +92,13 @@ export default function TodoForm() {
             />
           </View>
           <View>
-            <TouchableOpacity
-              style={styles.dateButton}
-              onPress={() => setVisible(true)}
-            >
-              <Button style={{ width: 140 }}>
+              <Button mode="outlined" style={{ width: 140 }} on onPress={() => setVisible(true)}>
                   {
                     hours && minutes
                       ? hours + ":" + minutes
                       : Moment().format("HH:mm")
                   }
               </Button>
-            </TouchableOpacity>
             <TimePickerModal
               visible={visible}
               onDismiss={onDismiss}
@@ -163,6 +153,7 @@ const styles = StyleSheet.create({
   header: {
     textAlign: "center",
     justifyContent: "center",
+    marginTop: 20,
     marginBottom: 40,
     fontWeight: "bold",
     fontSize: 20,
@@ -197,17 +188,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   dateButton: {
-    width: 200,
+    width: 150,
   },
   timeButton: {
-    marginTop: 40,
-    width: 200,
+    width: 150,
+    alignItems: "center",
   },
-
   menuItem: {
     height: 25,
   },
   picker: {
+    marginTop: 20,
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
