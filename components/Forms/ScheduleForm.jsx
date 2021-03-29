@@ -77,20 +77,13 @@ export default function TodoForm() {
               style={styles.dateButton}
               onPress={() => setOpen(true)}
             >
-              <Picker
-                // selectedValue={date ? Moment(date).format("MM-DD-YYYY") : ""}
-                mode="dropdown"
-                style={{ width: 140 }}
-              >
-                <Picker.Item
-                  label={
+              <Button style={{ width: 140 }}>
+                  {
                     date
                       ? Moment(date).format("MM-DD-YYYY")
                       : Moment().format("MM-DD-YYYY")
                   }
-                  value=""
-                />
-              </Picker>
+              </Button>
             </TouchableOpacity>
             <DatePickerModal
               mode="single"
@@ -108,16 +101,13 @@ export default function TodoForm() {
               style={styles.dateButton}
               onPress={() => setVisible(true)}
             >
-              <Picker mode="dropdown" style={{ width: 140 }}>
-                <Picker.Item
-                  label={
+              <Button style={{ width: 140 }}>
+                  {
                     hours && minutes
                       ? hours + ":" + minutes
                       : Moment().format("HH:mm")
                   }
-                  value=""
-                />
-              </Picker>
+              </Button>
             </TouchableOpacity>
             <TimePickerModal
               visible={visible}
