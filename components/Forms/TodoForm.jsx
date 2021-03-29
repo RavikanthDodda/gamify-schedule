@@ -1,14 +1,14 @@
 import React from "react";
 import { Button, TextInput } from "react-native-paper";
-import { StyleSheet, Text, View, } from "react-native";
-import {Picker} from "@react-native-community/picker"
+import { StyleSheet, Text, View } from "react-native";
+import { Picker } from "@react-native-community/picker";
 import { DatePickerModal } from "react-native-paper-dates";
 import { TimePickerModal } from "react-native-paper-dates";
 import Moment from "moment";
 import "intl";
 import "intl/locale-data/jsonp/en";
 
-export default function TodoForm(){
+export default function TodoForm() {
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [date, setDate] = React.useState(undefined);
@@ -33,8 +33,8 @@ export default function TodoForm(){
     [setOpen, setDate]
   );
   const onDismiss = React.useCallback(() => {
-    setVisible(false)
-  }, [setVisible])
+    setVisible(false);
+  }, [setVisible]);
 
   const onConfirm = React.useCallback(
     ({ hours, minutes }) => {
@@ -57,7 +57,7 @@ export default function TodoForm(){
           onChangeText={(title) => setTitle(title)}
         />
       </View>
-      <View style={styles.field, {marginTop:20}}>
+      <View style={(styles.field, { marginTop: 20 })}>
         <TextInput
           label="Description"
           value={description}
@@ -66,50 +66,71 @@ export default function TodoForm(){
           onChangeText={(description) => setDescription(description)}
         />
       </View>
-        <View style={styles.dateModalButton}>
-          <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined" style={styles.dateButton}>
-            Select Due Date
-          </Button>
-          <DatePickerModal
-            mode="single"
-            visible={open}
-            onDismiss={onDismissSingle}
-            date={date}
-            onConfirm={onConfirmSingle}
-            validRange={{
-              startDate: new Date(),
-            }}
-          />
-          {showDate ? <Text style={styles.dateText}>     {Moment(date).format('MM-DD-YYYY')}</Text> : null}
-        </View>
-        <View style={styles.TimeModalButton}>
-          <Button onPress={()=> setVisible(true)} uppercase={false} mode="outlined" style={styles.timeButton}>
-            Select Due Time
-          </Button>
-          <TimePickerModal
-            visible={visible}
-            onDismiss={onDismiss}
-            onConfirm={onConfirm}
-            // hours={12} // default: current hours
-            // minutes={14} // default: current minutes
-            animationType="fade"
-            locale={'en'}
-          />
-          {showTime ? <Text hide={false} style={styles.timeText}>     {hours}:{minutes}</Text> : null}
-        </View>
-        <View style={styles.pickerButton}>
-          <Button uppercase={false} style={styles.difficultyText}>
-            Select Difficulty
-          </Button>
-          <Picker
-            selectedValue={difficulty}
-            onValueChange={(difficulty) => setDifficulty(difficulty)}
-            style={{ width: 140}}
-            mode="dropdown">
-            <Picker.Item label="Easy" value="Easy" />
-            <Picker.Item label="Medium" value="Medium" />
-            <Picker.Item label="Hard" value="Hard" />
-          </Picker>
+      <View style={styles.dateModalButton}>
+        <Button
+          onPress={() => setOpen(true)}
+          uppercase={false}
+          mode="outlined"
+          style={styles.dateButton}
+        >
+          Select Due Date
+        </Button>
+        <DatePickerModal
+          mode="single"
+          visible={open}
+          onDismiss={onDismissSingle}
+          date={date}
+          onConfirm={onConfirmSingle}
+          validRange={{
+            startDate: new Date(),
+          }}
+        />
+        {showDate ? (
+          <Text style={styles.dateText}>
+            {" "}
+            {Moment(date).format("MM-DD-YYYY")}
+          </Text>
+        ) : null}
+      </View>
+      <View style={styles.TimeModalButton}>
+        <Button
+          onPress={() => setVisible(true)}
+          uppercase={false}
+          mode="outlined"
+          style={styles.timeButton}
+        >
+          Select Due Time
+        </Button>
+        <TimePickerModal
+          visible={visible}
+          onDismiss={onDismiss}
+          onConfirm={onConfirm}
+          // hours={12} // default: current hours
+          // minutes={14} // default: current minutes
+          animationType="fade"
+          locale={"en"}
+        />
+        {showTime ? (
+          <Text hide={false} style={styles.timeText}>
+            {" "}
+            {hours}:{minutes}
+          </Text>
+        ) : null}
+      </View>
+      <View style={styles.pickerButton}>
+        <Button uppercase={false} style={styles.difficultyText}>
+          Select Difficulty
+        </Button>
+        <Picker
+          selectedValue={difficulty}
+          onValueChange={(difficulty) => setDifficulty(difficulty)}
+          style={{ width: 140 }}
+          mode="dropdown"
+        >
+          <Picker.Item label="Easy" value="Easy" />
+          <Picker.Item label="Medium" value="Medium" />
+          <Picker.Item label="Hard" value="Hard" />
+        </Picker>
       </View>
       <View style={styles.buttonParent}>
         <View style={styles.btn1}>
@@ -132,19 +153,19 @@ const styles = StyleSheet.create({
   },
   header: {
     textAlign: "center",
-    justifyContent: "center", 
+    justifyContent: "center",
     marginBottom: 40,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 20,
   },
-  dateText:{
-    fontWeight: 'bold',
+  dateText: {
+    fontWeight: "bold",
     fontSize: 15,
     marginTop: 50,
     textAlign: "center",
   },
-  timeText:{
-    fontWeight: 'bold',
+  timeText: {
+    fontWeight: "bold",
     fontSize: 15,
     marginTop: 50,
     textAlign: "center",
@@ -152,46 +173,46 @@ const styles = StyleSheet.create({
   field: {
     marginBottom: 10,
   },
-  buttonParent:{
-    flexDirection: 'row',
+  buttonParent: {
+    flexDirection: "row",
     justifyContent: "center",
-    marginTop: 80
+    marginTop: 80,
   },
   btn1: {
     display: "flex",
     alignItems: "center",
-    marginRight: 100
+    marginRight: 100,
   },
   btn2: {
     display: "flex",
     alignItems: "center",
   },
-  dateButton:{
+  dateButton: {
     marginTop: 40,
-    width: 200
+    width: 200,
   },
-  timeButton:{
+  timeButton: {
     marginTop: 40,
-    width: 200
+    width: 200,
   },
-  difficultyText:{
+  difficultyText: {
     marginTop: 60,
-    width: 200
+    width: 200,
   },
-  menuItem:{
-    height: 25
+  menuItem: {
+    height: 25,
   },
-  dateModalButton:{
-    flexDirection: 'row',
+  dateModalButton: {
+    flexDirection: "row",
   },
-  TimeModalButton:{
-    flexDirection: 'row',
+  TimeModalButton: {
+    flexDirection: "row",
   },
-  pickerButton:{
-    flexDirection: 'row',
+  pickerButton: {
+    flexDirection: "row",
   },
-  menuDifficultyButton:{
+  menuDifficultyButton: {
     marginTop: 40,
-    width: 200
+    width: 200,
   },
 });

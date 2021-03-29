@@ -7,6 +7,7 @@ import CustomerService from "./services/CustomerService";
 import { createStackNavigator } from "@react-navigation/stack";
 import ScheduleTaskPage from "./Pages/ScheduleTaskPage";
 import TodoTaskPage from "./Pages/TodoTaskPage";
+import ScheduleForm from "./components/Forms/ScheduleForm";
 
 export default function App() {
   useEffect(() => {
@@ -16,21 +17,22 @@ export default function App() {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={NavBar} />
-        <Stack.Screen
-          options={({ route }) => ({ title: route.params.name })}
-          name="Schedule-Task-Page"
-          component={ScheduleTaskPage}
-        />
-        <Stack.Screen
-          options={({ route }) => ({ title: route.params.name })}
-          name="Todo-Task-Page"
-          component={TodoTaskPage}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    // <NavigationContainer>
+    //   <Stack.Navigator>
+    //     <Stack.Screen name="Home" component={NavBar} />
+    //     <Stack.Screen
+    //       options={({ route }) => ({ title: route.params.name })}
+    //       name="Schedule-Task-Page"
+    //       component={ScheduleTaskPage}
+    //     />
+    //     <Stack.Screen
+    //       options={({ route }) => ({ title: route.params.name })}
+    //       name="Todo-Task-Page"
+    //       component={TodoTaskPage}
+    //     />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
+    <ScheduleForm />
   );
 }
 

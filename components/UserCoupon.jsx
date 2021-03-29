@@ -1,6 +1,6 @@
 import React from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
-import { Colors, List } from "react-native-paper";
+import { List } from "react-native-paper";
 
 export default function UserCoupon(props) {
   return (
@@ -9,19 +9,21 @@ export default function UserCoupon(props) {
         title={props.title}
         description={props.description}
         right={(props) => (
-        <View>
-          <Text style={styles.text}
-          onPress = {() => Alert.alert("GET pressed")}>GET</Text>
-          <Text>{props.description} points</Text>
-        </View>
+          <View>
+            <Text
+              style={styles.text}
+              onPress={() => Alert.alert("GET pressed")}
+            >
+              GET
+            </Text>
+            <Text>{props.description} points</Text>
+          </View>
         )}
         style={styles.listItem}
       />
     </View>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -34,8 +36,8 @@ const styles = StyleSheet.create({
   listItem: {
     // backgroundColor: "lightblue",
   },
-  text:{
-    fontWeight:"bold", 
-    padding:10
-  }
+  text: {
+    fontWeight: "bold",
+    padding: 10,
+  },
 });
