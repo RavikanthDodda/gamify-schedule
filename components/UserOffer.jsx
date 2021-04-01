@@ -16,12 +16,12 @@ export default function UserOffer(props) {
 
         right={() => (
         <View>
-          <Text style={styles.text}></Text>
+          <Text style={styles.text}>GET OFFER</Text>
           <Text>Points: {cost}</Text>
           <Text>Valid till: {expiry}</Text>
         </View>
         )}
-        onPress={() => props.navigation.navigate("Offers-Details-Page", {
+        onPress={() => props.navigation.navigate("Details-Page", {
             paramKey: offertitle,
             expirydate:expiry,
             details:extraDetails,

@@ -62,7 +62,7 @@ export default function App() {
         />
         <Stack.Screen
           options={({ route }) => ({ title: route.params.name })}
-          name="Offers-Details-Page"
+          name="Details-Page"
           component={OfferDetailsPage}
         />
       </Stack.Navigator>

@@ -24,7 +24,7 @@ function UserCouponsPage({navigation}) {
       <FlatList
         data={coupons}
         renderItem={item => 
-          <UserCoupon item={item.item} title={item.item.title} description={item.item.description} cost={item.item.cost} expiry={item.item.expiry}/>
+          <UserCoupon item={item.item} title={item.item.title} description={item.item.description} cost={item.item.cost} expiry={item.item.expiry} navigation={navigation} extraDetails={item.item.extraDetails} />
         }
       />
     </View>

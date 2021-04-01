@@ -5,6 +5,10 @@ import { List } from "react-native-paper";
 export default function UserCoupon(props) {
   let cost = props.cost
   let expiry = props.expiry
+  let offertitle = props.title
+  let description = props.description
+  let extraDetails = props.extraDetails
+
   return (
     <View style={styles.container}>
       <List.Item
@@ -13,12 +17,17 @@ export default function UserCoupon(props) {
 
         right={() => (
         <View>
-          <Text style={styles.text}
-          onPress = {() => Alert.alert("GET pressed")}>GET COUPON</Text>
+          <Text style={styles.text}>GET COUPON</Text>
           <Text>Points: {cost}</Text>
           <Text>Valid till: {expiry}</Text>
         </View>
         )}
+        onPress={() => props.navigation.navigate("Details-Page", {
+          paramKey: offertitle,
+          expirydate:expiry,
+          details:extraDetails,
+          cost : cost,
+        })}
         style={styles.listItem}
       />
     </View>
