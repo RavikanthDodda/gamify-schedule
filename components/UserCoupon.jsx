@@ -1,6 +1,6 @@
 import React from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
-import { Colors, List } from "react-native-paper";
+import { List } from "react-native-paper";
 
 export default function UserCoupon(props) {
   let cost = props.cost
@@ -10,6 +10,7 @@ export default function UserCoupon(props) {
       <List.Item
         title={props.title}
         description={props.description}
+
         right={() => (
         <View>
           <Text style={styles.text}
@@ -23,8 +24,6 @@ export default function UserCoupon(props) {
     </View>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   container: {

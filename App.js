@@ -8,9 +8,13 @@ import UserCouponsService from "./services/UserCouponsService";
 import { createStackNavigator } from "@react-navigation/stack";
 import ScheduleTaskPage from "./Pages/ScheduleTaskPage";
 import TodoTaskPage from "./Pages/TodoTaskPage";
+<<<<<<< HEAD
 import StorePage from "./Pages/Store"
 import UserCouponsPage from "./Pages/UserCouponsPage"
 import PurchaseCoupon from "./Pages/PurchaseCoupon"
+=======
+import ScheduleForm from "./components/Forms/ScheduleForm";
+>>>>>>> main
 
 export default function App() {
   useEffect(() => {
