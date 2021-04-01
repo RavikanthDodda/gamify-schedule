@@ -14,15 +14,22 @@ function Store({ navigation }) {
         <View style={styles.row1}>
         <TouchableOpacity
                      onPress={() => navigation.navigate("Purchase-Coupon", {
-                      screen: "Coupons",
-                      params: { action: "view coupon" },
+                      paramKey: "Amazon Fashion",
+                      expirydate:"30/5/2021",
+                      details:"Deals on clothing",
+                      cost : "100",
                     })}>
                      <Card style={styles.card}>
                         <Card.Cover source={require('../assets/amazon1.png')} />
                       </Card>
         </TouchableOpacity>
         <TouchableOpacity
-                     onPress = {() => Alert.alert("GET pressed")}>
+                     onPress={() => navigation.navigate("Purchase-Coupon", {
+                      paramKey: "Walmart",
+                      expirydate:"30/4/2021",
+                      details:"Early access to video games at store",
+                      cost : "200",
+                    })}>
                      <Card style={styles.card}>
                         <Card.Cover source={require('../assets/walmart.png')} />
                       </Card>
@@ -30,13 +37,23 @@ function Store({ navigation }) {
         </View>
         <View style={styles.row1}>
         <TouchableOpacity
-                     onPress = {() => Alert.alert("GET pressed")}>
+                     onPress={() => navigation.navigate("Purchase-Coupon", {
+                      paramKey: "Costco",
+                      expirydate:"30/6/2021",
+                      details:"Offers on costco travel package",
+                      cost : "100",
+                    })}>
                      <Card style={styles.card}>
                         <Card.Cover source={require('../assets/costco.png')} />
                       </Card>
         </TouchableOpacity>
         <TouchableOpacity
-                     onPress = {() => Alert.alert("GET pressed")}>
+                     onPress={() => navigation.navigate("Purchase-Coupon", {
+                      paramKey: "Amazon Prime",
+                      expirydate:"10/5/2021",
+                      details:"Only for prime members.",
+                      cost : "50",
+                    })}>
                      <Card style={styles.card}>
                         <Card.Cover source={require('../assets/prime.png')} />
                       </Card>
@@ -59,9 +76,9 @@ function Store({ navigation }) {
         title="Offers"
         description="Browse all offers"
         style={styles.containerListItem}
-        onPress={() => navigation.navigate("User-Coupons-Page", {
-          screen: "Coupons List",
-          params: { action: "view coupons" },
+        onPress={() => navigation.navigate("User-Offers-Page", {
+          screen: "Offers List",
+          params: { action: "view offers" },
         })}
         />
         </View>
