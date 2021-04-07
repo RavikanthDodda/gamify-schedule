@@ -39,5 +39,37 @@ export default [
       extraDetails:"Limited Deals",
       expiry: "25/5/2021",
       cost:"50"
+    },
+    {
+      id: "51",
+      title: "JCpenny",
+      description: "10% off on watches",
+      extraDetails:"Limited Deals",
+      expiry: "25/5/2021",
+      cost:"50"
+    },
+    {
+      id: "52",
+      title: "JCpenny",
+      description: "10% off on watches",
+      extraDetails:"Limited Deals",
+      expiry: "25/5/2021",
+      cost:"50"
+    },
+    {
+      id: "53",
+      title: "JCpenny",
+      description: "10% off on watches",
+      extraDetails:"Limited Deals",
+      expiry: "25/5/2021",
+      cost:"50"
+    },
+    {
+      id: "56",
+      title: "JCpenny",
+      description: "10% off on watches",
+      extraDetails:"Limited Deals",
+      expiry: "25/5/2021",
+      cost:"50"
     }
   ];
