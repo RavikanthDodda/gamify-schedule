@@ -14,9 +14,7 @@ export default [
     id: "6",
     title: "Todo 2",
     description: "this is task 2",
-    difficulty: "Low",
+    difficulty: "Easy",
     due: "xxxxxx",
-    "Repeat on": ["sunday"],
-    "Repeat every": "week",
   },
 ];

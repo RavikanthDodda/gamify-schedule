@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 class CustomerService {
   constructor() {
     this.userId = "ravi";
-    this.scheduleKey = this.userId + ".schedule.tasks";
+    this.scheduleKey = this.userId + ".schedule.tasks.";
     this.todoKey = this.userId + ".todo.tasks";
   }
 
