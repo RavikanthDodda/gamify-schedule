@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View , Alert} from "react-native";
+import { StyleSheet,SafeAreaView,ScrollView, Text, View , Alert} from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import UserOffer from '../components/UserOffer'
 import UserOffersService from "../services/UserOffersService";
@@ -21,12 +21,14 @@ function UserOffersPage({navigation}) {
     return (
     <View>
       <Text style={styles.header}>Offers</Text>
+      <SafeAreaView >
       <FlatList
         data={offers}
         renderItem={item => 
           <UserOffer item={item.item} title={item.item.title} description={item.item.description} cost={item.item.cost} expiry={item.item.expiry} extraDetails={item.item.extraDetails} navigation={navigation}/>
         }
       />
+      </SafeAreaView>
     </View>
   );
 } 
@@ -34,7 +36,6 @@ function UserOffersPage({navigation}) {
 const styles = StyleSheet.create({
   header: {
     justifyContent: "center", 
-    marginTop: 40,
     fontWeight: 'bold',
     fontSize: 20,
     padding:10
