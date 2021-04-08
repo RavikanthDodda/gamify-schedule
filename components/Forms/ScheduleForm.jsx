@@ -8,7 +8,6 @@ import Moment from "moment";
 import "intl";
 import "intl/locale-data/jsonp/en";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-import DropDown from "react-native-paper-dropdown";
 
 export default function TodoForm() {
   const [title, setTitle] = React.useState("");
