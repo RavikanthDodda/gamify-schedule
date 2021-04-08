@@ -67,7 +67,7 @@ function Store({ navigation }) {
         title="Coupons"
         description="Browse all coupons"
         style={styles.containerListItem}
-        onPress={() => navigation.navigate("User-Coupons-Page", {
+        onPress={() => navigation.navigate("Coupons List", {
           screen: "Coupons List",
           params: { action: "view coupons" },
         })}
@@ -76,7 +76,7 @@ function Store({ navigation }) {
         title="Offers"
         description="Browse all offers"
         style={styles.containerListItem}
-        onPress={() => navigation.navigate("User-Offers-Page", {
+        onPress={() => navigation.navigate("Offers List", {
           screen: "Offers List",
           params: { action: "view offers" },
         })}
