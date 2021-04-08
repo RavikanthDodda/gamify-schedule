@@ -16,7 +16,7 @@ export default function ScheduleForm(props) {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
-  const [difficulty, setDifficulty] = useState("easy");
+  const [difficulty, setDifficulty] = useState("");
   const [repeatOn, setRepeatOn] = useState("days");
   const [repeatEvery, setRepeatEvery] = useState("1");
   const [sun, setSun] = useState(false);
@@ -186,7 +186,6 @@ export default function ScheduleForm(props) {
             display: "flex",
             flexDirection: "row",
             justifyContent: "flex-start",
-            marginTop: 10,
             alignItems: "center",
           }}
         >

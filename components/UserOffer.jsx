@@ -16,7 +16,6 @@ export default function UserOffer(props) {
 
         right={() => (
         <View>
-          <Text style={styles.text}>GET OFFER</Text>
           <Text>Points: {cost}</Text>
           <Text>Valid till: {expiry}</Text>
         </View>

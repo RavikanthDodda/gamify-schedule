@@ -17,7 +17,6 @@ export default function UserCoupon(props) {
 
         right={() => (
         <View>
-          <Text style={styles.text}>GET COUPON</Text>
           <Text>Points: {cost}</Text>
           <Text>Valid till: {expiry}</Text>
         </View>
