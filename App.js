@@ -56,12 +56,12 @@ export default function App() {
         />
         <Stack.Screen
           options={({ route }) => ({ title: route.params.name })}
-          name="User-Coupons-Page"
+          name="Coupons List"
           component={UserCouponsPage}
         />
         <Stack.Screen
           options={({ route }) => ({ title: route.params.name })}
-          name="User-Offers-Page"
+          name="Offers List"
           component={UserOffersPage}
         />
         <Stack.Screen
