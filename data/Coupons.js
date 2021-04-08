@@ -41,35 +41,35 @@ export default [
       cost:"50"
     },
     {
-      id: "51",
-      title: "JCpenny",
-      description: "10% off on watches",
-      extraDetails:"Limited Deals",
-      expiry: "25/5/2021",
+      id: "6",
+      title: "Khol's",
+      description: "50% off on Kids wear",
+      extraDetails:"Offers is applicable on items starting at $15",
+      expiry: "20/4/2021",
       cost:"50"
     },
     {
-      id: "52",
-      title: "JCpenny",
-      description: "10% off on watches",
-      extraDetails:"Limited Deals",
-      expiry: "25/5/2021",
+      id: "7",
+      title: "Target",
+      description: "20% off on face masks",
+      extraDetails:"Limited stock",
+      expiry: "31/4/2021",
       cost:"50"
     },
     {
-      id: "53",
-      title: "JCpenny",
-      description: "10% off on watches",
-      extraDetails:"Limited Deals",
-      expiry: "25/5/2021",
+      id: "8",
+      title: "Target",
+      description: "20% off on bedding",
+      extraDetails:"Only in stores",
+      expiry: "18/4/2021",
       cost:"50"
     },
     {
-      id: "56",
+      id: "9",
       title: "JCpenny",
-      description: "10% off on watches",
-      extraDetails:"Limited Deals",
-      expiry: "25/5/2021",
+      description: "50% off on winter wear",
+      extraDetails:"Limited Stock",
+      expiry: "30/4/2021",
       cost:"50"
     }
   ];
