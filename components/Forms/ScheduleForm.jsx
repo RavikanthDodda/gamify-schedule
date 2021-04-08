@@ -186,7 +186,6 @@ export default function ScheduleForm(props) {
             display: "flex",
             flexDirection: "row",
             justifyContent: "flex-start",
-            marginTop: 10,
             alignItems: "center",
           }}
         >

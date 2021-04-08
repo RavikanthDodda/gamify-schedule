@@ -34,6 +34,11 @@ class CustomerService {
           if (element.id === task.id) {
             element.title = task.title;
             element.description = task.description;
+            element.difficulty = task.difficulty;
+            element.repeatOn = task.repeatOn;
+            element.repeatEvery = task.repeatEvery;
+            element.weekData = task.weekData;
+            element.date = task.date;
           }
         });
         jsonValue = oldValue;
