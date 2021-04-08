@@ -36,8 +36,7 @@ function UserCouponsPage({navigation}) {
 
 const styles = StyleSheet.create({
   header: {
-    justifyContent: "center", 
-    marginTop: 40,
+    justifyContent: "center",
     fontWeight: 'bold',
     fontSize: 20,
     padding:10

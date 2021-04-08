@@ -93,7 +93,7 @@ export default Store;
 const styles = StyleSheet.create({
   row1:{
     flexDirection:"row",
-    padding:20,
+    padding:5,
   },
   container: {
     marginStart:10,
@@ -101,12 +101,13 @@ const styles = StyleSheet.create({
   },
   card:{
     marginHorizontal:5,
-    width:170,
+    width: 150,
+    
   },
   featuredText:{
     fontSize:20,
     fontWeight:"bold",
-    marginTop:50,
+    marginTop:5,
     padding:10
   },
   containerListItem: {

@@ -36,7 +36,6 @@ function UserOffersPage({navigation}) {
 const styles = StyleSheet.create({
   header: {
     justifyContent: "center", 
-    marginTop: 40,
     fontWeight: 'bold',
     fontSize: 20,
     padding:10
