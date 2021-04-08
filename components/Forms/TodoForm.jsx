@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, TextInput } from "react-native-paper";
+import React, { useEffect, useState } from "react";
+import { Button, TextInput, Title, Chip } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
 import { Picker } from "@react-native-community/picker";
 import { DatePickerModal } from "react-native-paper-dates";
@@ -7,15 +7,19 @@ import { TimePickerModal } from "react-native-paper-dates";
 import Moment from "moment";
 import "intl";
 import "intl/locale-data/jsonp/en";
+import { ScrollView } from "react-native-gesture-handler";
 
-export default function TodoForm() {
-  const [title, setTitle] = React.useState("");
-  const [description, setDescription] = React.useState("");
+import CustomerService from "../../services/CustomerService";
+
+export default function TodoForm(props) {
+  const [id, setId] = useState(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [date, setDate] = React.useState(undefined);
   const [open, setOpen] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
-  const [hours, setHours] = React.useState("-");
-  const [minutes, setMinutes] = React.useState("-");
+  const [hours, setHours] = React.useState("");
+  const [minutes, setMinutes] = React.useState("");
   const [showDate, setShowDate] = React.useState(false);
   const [showTime, setShowTime] = React.useState(false);
   const [difficulty, setDifficulty] = React.useState("");
@@ -46,9 +50,53 @@ export default function TodoForm() {
     [setVisible]
   );
 
+  const loadTasks = async () => {
+    const data = await CustomerService.getTodoTask(props.route.params?.taskId);
+    if (data) {
+      setId(data.id);
+      setTitle(data.title);
+      setDescription(data.description);
+      setDate(new Date(data.date))
+      setHours(data.hours);
+      setMinutes(data.minutes);
+      setDifficulty(data.difficulty);
+    }
+  };
+
+  useEffect(() => {
+    loadTasks();
+    // notify();
+  }, []);
+
+  const saveTask = async () => {
+    await CustomerService.saveTodoTask({
+      id: id,
+      title: title,
+      description: description,
+      date: date.toString(),
+      hours: hours,
+      minutes: minutes,
+      difficulty: difficulty
+    });
+    props.navigation.navigate("Home", {
+      screen: "Todo",
+      params: { action: "task added" },
+    });
+  };
+
+  const deleteTask = async () => {
+    const res = await CustomerService.deleteTodoTask(
+      props.route.params?.taskId
+    );
+    props.navigation.navigate("Home", {
+      screen: "Todo",
+      params: { action: "task added" },
+    });
+  };
+
   return (
+    <ScrollView keyboardShouldPersistTaps={"never"}>
     <View style={styles.container}>
-      <Text style={styles.header}>New to do</Text>
       <View style={styles.field}>
         <TextInput
           label="Title"
@@ -57,90 +105,99 @@ export default function TodoForm() {
           onChangeText={(title) => setTitle(title)}
         />
       </View>
-      <View style={(styles.field, { marginTop: 20 })}>
+      <View style={styles.field}>
         <TextInput
           label="Description"
           value={description}
-          multiline={true}
           textContentType="fullStreetAddress"
           onChangeText={(description) => setDescription(description)}
         />
       </View>
-      <View style={styles.dateModalButton}>
-        <Button
-          onPress={() => setOpen(true)}
-          uppercase={false}
-          mode="outlined"
-          style={styles.dateButton}
-        >
-          Select Due Date
-        </Button>
-        <DatePickerModal
-          mode="single"
-          visible={open}
-          onDismiss={onDismissSingle}
-          date={date}
-          onConfirm={onConfirmSingle}
-          validRange={{
-            startDate: new Date(),
+
+      <Title style={{ fontSize: 17, marginTop: 20 }}>Due date and time</Title>
+        <View style={styles.picker}>
+          <View>
+              <Button 
+              mode="contained" 
+              color="#E7E7E7"
+              style={{ width: 140 }} 
+              onPress={() => setOpen(true)} 
+              style={styles.dateButton}>
+                  {
+                    date
+                      ? Moment(date).format("MM-DD-YYYY")
+                      : Moment().format("MM-DD-YYYY")
+                  }
+              </Button>
+            <DatePickerModal
+              mode="single"
+              visible={open}
+              onDismiss={onDismissSingle}
+              date={date}
+              onConfirm={onConfirmSingle}
+              validRange={{
+                startDate: new Date(),
+              }}
+            />
+          </View>
+          <View>
+              <Button mode="contained" 
+              color="#E7E7E7"
+              style={{ width: 140 }} 
+              onPress={() => setVisible(true)}>
+                  {
+                    hours || minutes
+                      ? hours + ":" + minutes
+                      : Moment().format("HH:mm")
+                  }
+              </Button>
+            <TimePickerModal
+              visible={visible}
+              onDismiss={onDismiss}
+              onConfirm={onConfirm}
+              // hours={12} // default: current hours
+              // minutes={14} // default: current minutes
+              animationType="fade"
+              locale={"en"}
+            />
+          </View>
+        </View>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            marginTop: 10,
+            alignItems: "center",
           }}
-        />
-        {showDate ? (
-          <Text style={styles.dateText}>
-            {" "}
-            {Moment(date).format("MM-DD-YYYY")}
-          </Text>
-        ) : null}
-      </View>
-      <View style={styles.TimeModalButton}>
-        <Button
-          onPress={() => setVisible(true)}
-          uppercase={false}
-          mode="outlined"
-          style={styles.timeButton}
         >
-          Select Due Time
-        </Button>
-        <TimePickerModal
-          visible={visible}
-          onDismiss={onDismiss}
-          onConfirm={onConfirm}
-          // hours={12} // default: current hours
-          // minutes={14} // default: current minutes
-          animationType="fade"
-          locale={"en"}
-        />
-        {showTime ? (
-          <Text hide={false} style={styles.timeText}>
-            {" "}
-            {hours}:{minutes}
-          </Text>
-        ) : null}
-      </View>
-      <View style={styles.pickerButton}>
-        <Button uppercase={false} style={styles.difficultyText}>
-          Select Difficulty
-        </Button>
-        <Picker
-          selectedValue={difficulty}
-          onValueChange={(difficulty) => setDifficulty(difficulty)}
-          style={{ width: 140 }}
-          mode="dropdown"
-        >
-          <Picker.Item label="Easy" value="Easy" />
-          <Picker.Item label="Medium" value="Medium" />
-          <Picker.Item label="Hard" value="Hard" />
-        </Picker>
-      </View>
+          <Title style={{ fontSize: 17 }}>Difficulty</Title>
+          <Picker
+            selectedValue={difficulty}
+            onValueChange={(difficulty) => setDifficulty(difficulty)}
+            style={{ width: 100, marginLeft: 20 }}
+            mode="dropdown"
+          >
+            <Picker.Item label="Easy" value="Easy" />
+            <Picker.Item label="Medium" value="Medium" />
+            <Picker.Item label="Hard" value="Hard" />
+          </Picker>
+        </View>
+
       <View style={styles.buttonParent}>
         <View style={styles.btn1}>
-          <Button mode="contained">Cancel</Button>
+          <Button mode="contained" onPress={deleteTask}>
+            {props.route.params?.taskId ? "Delete" : "Cancel"}
+          </Button>
         </View>
         <View style={styles.btn2}>
-          <Button mode="contained">Save</Button>
+          <Button mode="contained" onPress={saveTask}>
+            Save
+          </Button>
         </View>
       </View>
     </View>
+    </ScrollView>
   );
 }
 
@@ -148,27 +205,8 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     padding: 30,
-    marginTop: 50,
+    marginTop: 20,
     justifyContent: "center",
-  },
-  header: {
-    textAlign: "center",
-    justifyContent: "center",
-    marginBottom: 40,
-    fontWeight: "bold",
-    fontSize: 20,
-  },
-  dateText: {
-    fontWeight: "bold",
-    fontSize: 15,
-    marginTop: 50,
-    textAlign: "center",
-  },
-  timeText: {
-    fontWeight: "bold",
-    fontSize: 15,
-    marginTop: 50,
-    textAlign: "center",
   },
   field: {
     marginBottom: 10,
@@ -176,7 +214,7 @@ const styles = StyleSheet.create({
   buttonParent: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 80,
+    marginTop: 20,
   },
   btn1: {
     display: "flex",
@@ -187,32 +225,13 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
   },
-  dateButton: {
-    marginTop: 40,
-    width: 200,
-  },
-  timeButton: {
-    marginTop: 40,
-    width: 200,
-  },
-  difficultyText: {
-    marginTop: 60,
-    width: 200,
-  },
   menuItem: {
     height: 25,
   },
-  dateModalButton: {
+  picker: {
+    marginTop: 20,
+    display: "flex",
     flexDirection: "row",
-  },
-  TimeModalButton: {
-    flexDirection: "row",
-  },
-  pickerButton: {
-    flexDirection: "row",
-  },
-  menuDifficultyButton: {
-    marginTop: 40,
-    width: 200,
+    justifyContent: "flex-start",
   },
 });

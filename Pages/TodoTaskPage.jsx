@@ -30,7 +30,6 @@ export default function TodoTaskPage(props) {
     (params) => {
       setOpen(false);
       setDate(params.date);
-      console.log(params.date);
       setShowDate(true);
     },
     [setOpen, setDate]
@@ -55,6 +54,7 @@ export default function TodoTaskPage(props) {
       setId(data.id);
       setTitle(data.title);
       setDescription(data.description);
+      setDate(new Date(data.date))
       setHours(data.hours);
       setMinutes(data.minues);
       setDifficulty(data.difficulty);
@@ -71,9 +71,9 @@ export default function TodoTaskPage(props) {
       id: id,
       title: title,
       description: description,
-      date: date,
+      date: date.toString(),
       hours: hours,
-      minues: minutes,
+      minutes: minutes,
       difficulty: difficulty
     });
     props.navigation.navigate("Home", {
