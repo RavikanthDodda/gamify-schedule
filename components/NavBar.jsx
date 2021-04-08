@@ -10,7 +10,7 @@ import React from "react";
 const Tab = createMaterialBottomTabNavigator();
 export default function MyTabs() {
   return (
-    <Tab.Navigator barStyle={{ backgroundColor: "#6200EE" }}>
+    <Tab.Navigator barStyle={{ backgroundColor: "#6200EE" }} shifting={false}>
       <Tab.Screen
         name="Todo"
         component={ItemList}
@@ -30,7 +30,7 @@ export default function MyTabs() {
       <Tab.Screen
         name="Schedule"
         component={ItemList}
-        initialParams={{ item: "schedule", formPage: "Schedule-Task-Page" }}
+        initialParams={{ item: "schedule", formPage: "Schedule-Form" }}
         options={{
           title: "Schedule",
           tabBarLabel: "Schedule",
@@ -64,15 +64,3 @@ export default function MyTabs() {
     </Tab.Navigator>
   );
 }
-// export default createMaterialBottomTabNavigator(
-//   {
-//     Todo: { screen: Todo },
-//     ItemList: { screen: ItemList },
-//     Store: { screen: Store },
-//     Profile: { screen: Profile },
-//   },
-//   {
-//     initialRouteName: "Album",
-//     activeColor: "#F44336",
-//   }
-// );
