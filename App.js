@@ -6,7 +6,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import CustomerService from "./services/CustomerService";
 import UserCouponsService from "./services/UserCouponsService";
 import { createStackNavigator } from "@react-navigation/stack";
-import ScheduleTaskPage from "./Pages/ScheduleTaskPage";
 import TodoTaskPage from "./Pages/TodoTaskPage";
 import StorePage from "./Pages/Store";
 import UserCouponsPage from "./Pages/UserCouponsPage";
@@ -15,7 +14,6 @@ import PurchaseCoupon from "./Pages/PurchaseCoupon";
 import ScheduleForm from "./components/Forms/ScheduleForm";
 import UserOffersService from "./services/UserOffersService";
 import OfferDetailsPage from "./Pages/OfferDetailsPage";
-
 
 export default function App() {
   useEffect(() => {
@@ -28,12 +26,23 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "#6200EE",
+          },
+          headerTintColor: "#fff",
+
+          headerTitleStyle: {
+            // fontWeight: "bold",
+          },
+        }}
+      >
         <Stack.Screen name="Home" component={NavBar} />
         <Stack.Screen
           options={({ route }) => ({ title: route.params.name })}
-          name="Schedule-Task-Page"
-          component={ScheduleTaskPage}
+          name="Schedule-Form"
+          component={ScheduleForm}
         />
         <Stack.Screen
           options={({ route }) => ({ title: route.params.name })}
