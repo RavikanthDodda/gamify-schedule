@@ -77,11 +77,15 @@ class CustomerService {
     try {
       const oldValue = JSON.parse(await AsyncStorage.getItem(this.todoKey));
       let jsonValue;
-      if (task.id !== undefined) {
+      if (task.id) {
         oldValue.forEach((element) => {
           if (element.id === task.id) {
             element.title = task.title;
             element.description = task.description;
+            element.date = task.date;
+            element.difficulty = task.difficulty;
+            element.hours = task.hours;
+            element.minutes = task.hours;
           }
         });
         jsonValue = oldValue;

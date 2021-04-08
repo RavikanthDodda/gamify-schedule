@@ -6,7 +6,7 @@ import { DatePickerModal } from "react-native-paper-dates";
 import Moment from "moment";
 import "intl";
 import "intl/locale-data/jsonp/en";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 
 import CustomerService from "../../services/CustomerService";
 
