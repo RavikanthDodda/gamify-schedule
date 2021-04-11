@@ -20,7 +20,6 @@ function UserOffersPage({navigation}) {
   }, []);
     return (
     <View>
-      <Text style={styles.header}>Offers</Text>
       <SafeAreaView >
       <FlatList
         data={offers}

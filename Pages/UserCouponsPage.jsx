@@ -20,7 +20,6 @@ function UserCouponsPage({navigation}) {
   }, []);
     return (
     <View>
-      <Text style={styles.header}>Coupons</Text>
       <SafeAreaView >
       <FlatList
         contentContainerStyle= {{paddingBottom: 200}}

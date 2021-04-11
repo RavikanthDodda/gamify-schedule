@@ -6,8 +6,11 @@ function OfferDetailsPage({route}) {
     const expiry = route.params.expirydate;
     const details = route.params.details;
     const cost = route.params.cost;
-  
+    const wallet = 500;
+    const remainingBalence = wallet - cost;
+
   return (
+    
     <View>
         <Text style={styles.header}>{text}</Text>
         <View style={styles.itemDetails}>
@@ -16,15 +19,14 @@ function OfferDetailsPage({route}) {
             <Text >Details: {details}</Text>
         </View>
         <View style={styles.cost}> 
-            <Text >Cost: {cost}</Text>
-            <Text >Wallet: 500 points</Text>
+            <Text >Cost: {cost} points</Text>
+            <Text >Points in your wallet: {wallet} points</Text>
         </View >
         <View style={styles.cost}>
-            <Text >Reminaing balance after purchase: 400 points</Text>
+            <Text >Reminaing balance after purchase: {remainingBalence} points</Text>
         </View>
         <View style={styles.btn}>
-            <Button  mode="contained" onPress = {() => Alert.alert("Cancel pressed")}>Cancel</Button>
-            <Button  mode="contained" onPress = {() => Alert.alert("Confirm pressed")}>Confirm</Button>
+            <Button  mode="contained" onPress = {() => Alert.alert("Buying coupon not implemented yet")}>Get Coupon</Button>
         </View>
     </View>
   );

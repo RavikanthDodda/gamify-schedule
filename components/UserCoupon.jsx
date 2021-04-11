@@ -17,8 +17,9 @@ export default function UserCoupon(props) {
 
         right={() => (
         <View>
-          <Text>Points: {cost}</Text>
-          <Text>Valid till: {expiry}</Text>
+          <Text>Cost: {cost}</Text>
+          <Text>Expires on: {expiry}</Text>
+          <Text style={styles.moreDetails}>more details..</Text>
         </View>
         )}
         onPress={() => props.navigation.navigate("Details-Page", {
@@ -48,5 +49,8 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     color:"blue",
     padding:10
+  },
+  moreDetails:{
+    color:"blue"
   }
 });

@@ -193,7 +193,7 @@ export default function ScheduleForm(props) {
           <Picker
             selectedValue={difficulty}
             onValueChange={(difficulty) => setDifficulty(difficulty)}
-            style={{ width: 120, marginLeft: 20 }}
+            style={{ width: 170, marginLeft: 20 }}
             mode="dropdown"
           >
             <Picker.Item label="Easy" value="easy" />

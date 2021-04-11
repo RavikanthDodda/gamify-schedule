@@ -4,7 +4,7 @@ export default [
       id: "1",
       title: "Dark Mode",
       description: "Get dark mode in app",
-      extraDetails:"Each pruchase is applicable for 1 year",
+      extraDetails:"This pruchase is applicable for 1 year",
       expiry: "30/11/2021",
       cost:"300"
     },
@@ -12,7 +12,7 @@ export default [
       id: "2",
       title: "Remove ads",
       description: "Removed ads in the app",
-      extraDetails:"Each pruchase is applicable for 1 year",
+      extraDetails:"This pruchase is applicable for 1 year",
       expiry: "30/11/2021",
       cost:"200"
     },
@@ -20,7 +20,7 @@ export default [
       id: "3",
       title: "Remove ads",
       description: "Removed ads in the app.",
-      extraDetails:"Opens in 29/11/2021. Each pruchase is applicable for 3 months",
+      extraDetails:"This pruchase is applicable for 3 months",
       expiry: "30/11/2021",
       cost:"30"
     },
