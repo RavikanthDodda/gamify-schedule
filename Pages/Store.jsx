@@ -38,10 +38,10 @@ function Store({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
                      onPress={() => navigation.navigate("Purchase-Coupon", {
-                      paramKey: "Walmart",
+                      paramKey: "Amazon Fresh",
                       expirydate:"30/4/2021",
-                      details:"Early access to video games at store",
-                      cost : 200,
+                      details:"Offers available on grocery items and fresh vegetables/fruits",
+                      cost : 40,
                     })}>
                       <Image
                       source={require('../assets/amazonFresh.png')}
@@ -64,7 +64,7 @@ function Store({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
                      onPress={() => navigation.navigate("Purchase-Coupon", {
-                      paramKey: "Amazon Prime",
+                      paramKey: "Amazon Prime Video",
                       expirydate:"10/5/2021",
                       details:"Only for prime members.",
                       cost : 50,
@@ -76,10 +76,10 @@ function Store({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
                      onPress={() => navigation.navigate("Purchase-Coupon", {
-                      paramKey: "Walmart",
+                      paramKey: "Target",
                       expirydate:"30/4/2021",
                       details:"Early access to video games at store",
-                      cost : 200,
+                      cost : 90,
                     })}>
                       <Image
                       source={require('../assets/target.png')}
