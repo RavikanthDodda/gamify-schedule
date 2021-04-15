@@ -17,13 +17,26 @@ export default function ListItem(props) {
 		return container
 	}
 
+	const getPoints = () => {
+		switch (item.difficulty) {
+			case "easy":
+				return 5;
+			case "medium":
+				return 20;
+			case "hard":
+				return 50;
+			default:
+				break;
+		}
+	}
+
 	return (
 		<View style={styles.container}>
 			<IconButton icon={getIcon()} color={ticked ? "#858585" : "#000"} onPress={
 				() => {
 					setTicked(!ticked);
 					if (!ticked)
-						props.onComplete("Task finished");
+						props.onComplete(`Task completed: Earned ${getPoints()} points`, getPoints());
 				}
 			} />
 			<View style={styles.listItem}>

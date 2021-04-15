@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import { Snackbar } from "react-native-paper";
 import AddFAB from "../components/AddFAB";
 
 import Item from "../components/Item";
 import CustomerService from "../services/CustomerService";
+import { PointsContext } from "../components/PointsContext";
 
 function ItemList(props) {
 	const { route, navigation } = props;
 	const [tasks, setTasks] = useState([]);
 	const [showBar, setShowBar] = useState(false);
 	const [message, setMessage] = useState("");
+	const { points, setPoints } = useContext(PointsContext);
 
-	const notify = (mesg) => {
+	const notify = (mesg, pts) => {
 		setMessage(mesg);
 		setShowBar(true);
+		setPoints(points + pts);
 	}
 
 
