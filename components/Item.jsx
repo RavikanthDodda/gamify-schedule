@@ -45,6 +45,7 @@ export default function ListItem(props) {
 						props.navigation.navigate(props.page, {
 							name: "Edit task",
 							taskId: item.id,
+							onDelete: props.onDelete
 						});
 					}}>
 					<Text style={{ fontWeight: "700", color: ticked ? "#858585" : "#000" }}> {item.title}</Text>

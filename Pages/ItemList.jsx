@@ -17,9 +17,16 @@ function ItemList(props) {
 	const notify = (mesg, pts) => {
 		setMessage(mesg);
 		setShowBar(true);
-		setPoints(points + pts);
+		if (pts !== null)
+			setPoints(points + pts);
 	}
 
+
+	if (route.params.action !== undefined) {
+		let mesg = route.params.action;
+		route.params.action = undefined;
+		notify(mesg, null);
+	}
 
 	const loadTasks = async () => {
 		let data;
@@ -40,7 +47,6 @@ function ItemList(props) {
 	useEffect(() => {
 		const unsubscribe = navigation.addListener("focus", () => {
 			loadTasks();
-			// notify();
 		});
 
 		return unsubscribe;

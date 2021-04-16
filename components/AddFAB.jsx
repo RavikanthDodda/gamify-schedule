@@ -11,6 +11,7 @@ function AddFAB(props) {
       onPress={() =>
         navigation.navigate(props.page, {
           name: props.name,
+			onDelete: props.onDelete
         })
       }
     />

@@ -24,9 +24,11 @@ class CustomerService {
 		} catch (e) { }
 	}
 
-	async getScheduleTask(points) {
+	async getScheduleTask(taskId) {
 		try {
-			await AsyncStorage.getItem(this.pointsKey, points);
+			let data = JSON.parse(await AsyncStorage.getItem(this.scheduleKey));
+			data = data.filter((item) => item.id === taskId);
+			return data[0];
 		} catch (e) { }
 	}
 
