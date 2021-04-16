@@ -1,82 +1,91 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import { Snackbar } from "react-native-paper";
 import AddFAB from "../components/AddFAB";
 
 import Item from "../components/Item";
 import CustomerService from "../services/CustomerService";
+import { PointsContext } from "../components/PointsContext";
 
 function ItemList(props) {
-  const { route, navigation } = props;
-  const [tasks, setTasks] = useState([]);
-  // const [showBar, setShowBar] = useState(false);
-  // let message = "";
-  // const notify = () => {
-  //   console.log(route.params);
-  //   if (route.params?.action) {
-  //     message = route.params.action;
-  //     setShowBar(true);
-  //   }
-  // };
+	const { route, navigation } = props;
+	const [tasks, setTasks] = useState([]);
+	const [showBar, setShowBar] = useState(false);
+	const [message, setMessage] = useState("");
+	const { points, setPoints } = useContext(PointsContext);
 
-  const loadTasks = async () => {
-    let data;
-    switch (route.params?.item) {
-      case "schedule":
-        data = await CustomerService.getScheduleTasks();
-        break;
+	const notify = (mesg, pts) => {
+		setMessage(mesg);
+		setShowBar(true);
+		if (pts !== null)
+			setPoints(points + pts);
+	}
 
-      case "todo":
-        data = await CustomerService.getTodoTasks();
-        break;
-      default:
-        break;
-    }
-    setTasks(data);
-  };
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      loadTasks();
-      // notify();
-    });
+	if (route.params.action !== undefined) {
+		let mesg = route.params.action;
+		route.params.action = undefined;
+		notify(mesg, null);
+	}
 
-    return unsubscribe;
-  }, [navigation]);
+	const loadTasks = async () => {
+		let data;
+		switch (route.params?.item) {
+			case "schedule":
+				data = await CustomerService.getScheduleTasks();
+				break;
 
-  return (
-    <React.Fragment>
-      <FlatList
-        data={tasks}
-        renderItem={(item) => (
-          <Item
-            item={item}
-            navigation={navigation}
-            type={route.params.item}
-            page={route.params.formPage}
-          />
-        )}
-        keyExtractor={(task) => task.id}
-      />
-      <AddFAB
-        navigation={navigation}
-        page={route.params.formPage}
-        name={"Add new task"}
-      />
-      {/* <Snackbar
-        visible={showBar}
-        onDismiss={() => setShowBar(false)}
-        action={{
-          label: "Undo",
-          onPress: () => {
-            console.log("pressed");
-          },
-        }}
-      >
-        hi
-      </Snackbar> */}
-    </React.Fragment>
-  );
+			case "todo":
+				data = await CustomerService.getTodoTasks();
+				break;
+			default:
+				break;
+		}
+		setTasks(data);
+	};
+
+	useEffect(() => {
+		const unsubscribe = navigation.addListener("focus", () => {
+			loadTasks();
+		});
+
+		return unsubscribe;
+	}, [navigation]);
+
+	return (
+		<React.Fragment>
+			<FlatList
+				data={tasks}
+				renderItem={(item) => (
+					<Item
+						item={item}
+						navigation={navigation}
+						type={route.params.item}
+						page={route.params.formPage}
+						onComplete={notify}
+					/>
+				)}
+				keyExtractor={(task) => task.id}
+			/>
+			<AddFAB
+				navigation={navigation}
+				page={route.params.formPage}
+				name={"Add new task"}
+			/>
+			<Snackbar
+				visible={showBar}
+				onDismiss={() => setShowBar(false)}
+				action={{
+					label: "Ok",
+					onPress: () => {
+						console.log("pressed");
+					},
+				}}
+			>
+				{message}
+			</Snackbar>
+		</React.Fragment>
+	);
 }
 
 export default ItemList;
