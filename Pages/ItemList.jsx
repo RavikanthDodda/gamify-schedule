@@ -3,9 +3,9 @@ import { FlatList } from "react-native-gesture-handler";
 import { Snackbar } from "react-native-paper";
 import AddFAB from "../components/AddFAB";
 
-import Item from "../components/Item";
+import Item from "../customer/components/ScheduleItem";
 import CustomerService from "../services/CustomerService";
-import { PointsContext } from "../components/PointsContext";
+import { PointsContext } from "../customer/components/PointsContext";
 
 function ItemList(props) {
 	const { route, navigation } = props;
@@ -22,11 +22,6 @@ function ItemList(props) {
 	}
 
 
-	if (route.params.action !== undefined) {
-		let mesg = route.params.action;
-		route.params.action = undefined;
-		notify(mesg, null);
-	}
 
 	const loadTasks = async () => {
 		let data;
@@ -44,13 +39,24 @@ function ItemList(props) {
 		setTasks(data);
 	};
 
-	useEffect(() => {
-		const unsubscribe = navigation.addListener("focus", () => {
-			loadTasks();
-		});
+	if (route.params.action !== undefined) {
+		let mesg = route.params.action;
+		route.params.action = undefined;
+		notify(mesg, null);
+		loadTasks();
+	}
 
-		return unsubscribe;
-	}, [navigation]);
+	useEffect(() => {
+		loadTasks();
+
+	}, []);
+	// 	useEffect(() => {
+	// 		const unsubscribe = navigation.addListener("focus", () => {
+	// 			loadTasks();
+	// 		});
+	// 
+	// 		return unsubscribe;
+	// 	}, [navigation]);
 
 	return (
 		<React.Fragment>

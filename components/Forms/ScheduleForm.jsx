@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, TextInput, Title, Chip } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
 import { Picker } from "@react-native-community/picker";
-import { DatePickerModal } from "react-native-paper-dates";
+import { DatePickerModal, TimePickerModal } from "react-native-paper-dates";
 import Moment from "moment";
 import "intl";
 import "intl/locale-data/jsonp/en";
@@ -80,7 +80,7 @@ export default function ScheduleForm(props) {
 		}
 		props.navigation.navigate("Home", {
 			screen: "Schedule",
-			params: { action: "Task deleted" },
+			params: { action: id ? "Task deleted" : undefined },
 		});
 	};
 
@@ -194,7 +194,7 @@ export default function ScheduleForm(props) {
 						selectedValue={difficulty}
 						onValueChange={(difficulty) => setDifficulty(difficulty)}
 						style={{ width: 170, marginLeft: 20 }}
-						mode="dropdown"
+					// {/* mode="dropdown" */}
 					>
 						<Picker.Item label="Low" value="easy" />
 						<Picker.Item label="Normal" value="med" />
@@ -237,6 +237,38 @@ export default function ScheduleForm(props) {
 					style={{
 						display: "flex",
 						flexDirection: "row",
+						alignItems: "center",
+						marginTop: 10
+					}}
+				>
+					<Text>Time </Text>
+
+					<View>
+						<Button mode="contained"
+							color="#E7E7E7"
+							style={{ marginLeft: 20 }}
+							onPress={() => setVisible(true)}>
+							{/* { */}
+							{/* 	hours || minutes */}
+							{/* 		? hours + ":" + minutes */}
+							{/* 		: Moment().format("HH:mm") */}
+							{/* } */}
+							Time
+						</Button>
+						<TimePickerModal
+							visible={false}
+							// hours={12} // default: current hours
+							// minutes={14} // default: current minutes
+							animationType="fade"
+							locale={"en"}
+						/>
+					</View>
+
+				</View>
+				<View
+					style={{
+						display: "flex",
+						flexDirection: "row",
 						justifyContent: "flex-start",
 						alignItems: "center",
 					}}
@@ -248,10 +280,10 @@ export default function ScheduleForm(props) {
 						style={{ width: 115, marginLeft: 10 }}
 						mode="dropdown"
 					>
-						<Picker.Item label="Daily" value="days" />
-						<Picker.Item label="Weekly" value="weeks" />
-						<Picker.Item label="Monthly" value="months" />
-						<Picker.Item label="Yearly" value="years" />
+						<Picker.Item label="Daily" value="Daily" />
+						<Picker.Item label="Weekly" value="Weekly" />
+						<Picker.Item label="Monthly" value="Monthly" />
+						<Picker.Item label="Yearly" value="Yearly" />
 					</Picker>
 					<Text>on every </Text>
 					<TextInput
@@ -263,6 +295,7 @@ export default function ScheduleForm(props) {
 					/>
 					<Text>{repeatOn}</Text>
 				</View>
+
 
 				{weekPicker()}
 				<View style={styles.buttonParent}>

@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, TextInput } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
+import { useContext } from "react";
+import { AuthContext } from "../components/AuthContext";
 
 export default function LoginPage({ navigation }) {
   const [username, setUsername] = React.useState("");
@@ -8,6 +10,19 @@ export default function LoginPage({ navigation }) {
 
   const [passwordError, setPasswordError] = React.useState("");
   const [usernameError, setUsernameError] = React.useState("");
+
+  const { setUser } = useContext(AuthContext);
+  const validateLogin = () => {
+    if (username === "Ravi" && password === "password") setUser("CUSTOMER");
+    else if (username === "Admin" && password === "password") setUser("ADMIN");
+    else if (username === "Sponsor" && password === "password")
+      setUser("SPONSOR");
+    else if (username !== "" && password !== "") {
+      setUsernameError("Username or Password is wrong. Please re-enter");
+    }
+    if (username === "") setUsernameError("Username can't be empty!");
+    if (password === "") setPasswordError("Password can't be empty!");
+  };
 
   return (
     <View style={styles.container}>
@@ -18,7 +33,7 @@ export default function LoginPage({ navigation }) {
           textContentType="username"
           onChangeText={(username) => setUsername(username)}
           onBlur={() => {
-            setUsernameError(username !== "" ? "" : "Please enter a username");
+            setUsernameError(username !== "" ? "" : "Username can't be empty!");
           }}
           error={usernameError !== ""}
         />
@@ -32,20 +47,22 @@ export default function LoginPage({ navigation }) {
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
           onBlur={() => {
-            setPasswordError(password !== "" ? "" : "Please enter a password");
+            setPasswordError(password !== "" ? "" : "Password can't be empty!");
           }}
           error={passwordError !== ""}
         />
         <Text style={styles.errorText}>{passwordError}</Text>
       </View>
       <View style={styles.btn}>
-        <Button mode="contained">Login</Button>
+        <Button mode="contained" onPress={validateLogin}>
+          Login
+        </Button>
       </View>
       <Text
         style={styles.newUserText}
-        onPress={() => navigation.navigate("Register")}
+        onPress={() => navigation.navigate("Sign up")}
       >
-        New user? Sing up now
+        New user? Sign up now
       </Text>
     </View>
   );

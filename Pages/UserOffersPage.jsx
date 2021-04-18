@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet,SafeAreaView,ScrollView, Text, View , Alert} from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import UserOffer from '../components/UserOffer'
+import UserOffer from '../customer/components/UserOffer'
 import UserOffersService from "../services/UserOffersService";
 
 function UserOffersPage({navigation}) {

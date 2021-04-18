@@ -1,116 +1,44 @@
 import React from "react";
-import NavBar from "./components/NavBar";
-import { StyleSheet } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import CustomerService from "./services/CustomerService";
-import UserCouponsService from "./services/UserCouponsService";
 import { createStackNavigator } from "@react-navigation/stack";
-import StorePage from "./Pages/Store";
-import UserCouponsPage from "./Pages/UserCouponsPage";
-import UserOffersPage from "./Pages/UserOffersPage";
-import PurchaseCoupon from "./Pages/PurchaseCoupon";
-import ScheduleForm from "./components/Forms/ScheduleForm";
-import TodoForm from "./components/Forms/TodoForm";
-import UserOffersService from "./services/UserOffersService";
-import OfferDetailsPage from "./Pages/OfferDetailsPage";
-
-import { PointsContext } from "./components/PointsContext";
+import LoginScreen from "./Pages/LoginScreen";
+import CustomerNav from "./customer/components/CustomerNav";
+import { AuthContext } from "./components/AuthContext";
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.Stack = createStackNavigator();
+    this.setUser = (user) => {
+      this.setState({
+        user: user,
+      });
+    };
+    this.state = {
+      user: null,
+      setUser: this.setUser,
+    };
+  }
 
-	constructor(props) {
-		super(props);
-		this.setPoints = (points) => {
-			this.setState({
-				points: points
-			});
-			CustomerService.setPoints(this.state.points);
-		};
-		this.state = {
-			points: 0,
-			setPoints: this.setPoints,
-		};
-	}
+  getComponent() {
+    switch (this.state.user) {
+      case "CUSTOMER":
+        return <CustomerNav />;
+      //   case 'CUSTOMER':
 
-	componentDidMount() {
-		CustomerService.loadData();
-		UserCouponsService.loadCouponsData();
-		UserOffersService.loadOffersData();
-		CustomerService.getPoints().then(res => {
-			this.setState({
-				points: res
-			});
-		})
-	}
+      //       break;
+      //   case 'CUSTOMER':
 
+      //       break;
+      default:
+        return <LoginScreen />;
+    }
+  }
 
-	render() {
-		const Stack = createStackNavigator();
-		return (
-			<PointsContext.Provider value={this.state}>
-				<NavigationContainer>
-					<Stack.Navigator
-						screenOptions={{
-							headerStyle: {
-								backgroundColor: "#6200EE",
-							},
-							headerTintColor: "#fff",
-
-							headerTitleStyle: {
-								// fontWeight: "bold",
-							},
-						}}
-					>
-						<Stack.Screen name="Home" component={NavBar} />
-						<Stack.Screen
-							options={({ route }) => ({ title: route.params.name })}
-							name="Schedule-Form"
-							component={ScheduleForm}
-						/>
-						<Stack.Screen
-							options={({ route }) => ({ title: route.params.name })}
-							name="Todo-Task-Page"
-							component={TodoForm}
-						/>
-						<Stack.Screen
-							options={({ route }) => ({ title: route.params.name })}
-							name="Store-Page"
-							component={StorePage}
-						/>
-						<Stack.Screen
-							options={({ route }) => ({ title: route.params.name })}
-							name="Coupons List"
-							component={UserCouponsPage}
-						/>
-						<Stack.Screen
-							options={({ route }) => ({ title: route.params.name })}
-							name="Offers List"
-							component={UserOffersPage}
-						/>
-						<Stack.Screen
-							options={({ route }) => ({ title: route.params.name })}
-							name="Purchase-Coupon"
-							component={PurchaseCoupon}
-						/>
-						<Stack.Screen
-							options={({ route }) => ({ title: route.params.name })}
-							name="Details-Page"
-							component={OfferDetailsPage}
-						/>
-					</Stack.Navigator>
-				</NavigationContainer >
-			</PointsContext.Provider>
-		);
-
-	}
-
-	styles = StyleSheet.create({
-		container: {
-			flex: 1,
-			backgroundColor: "#fff",
-			alignItems: "center",
-			justifyContent: "center",
-		},
-	});
-
+  render() {
+    return (
+      <AuthContext.Provider value={this.state}>
+        {this.getComponent()}
+      </AuthContext.Provider>
+    );
+  }
 }
