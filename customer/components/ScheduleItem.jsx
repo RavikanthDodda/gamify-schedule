@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { IconButton } from "react-native-paper";
+import ScheduleItemContent from "../../components/ScheduleItemContent";
 
 export default function ListItem(props) {
 	const { item } = props.item;
@@ -21,7 +22,7 @@ export default function ListItem(props) {
 		switch (item.difficulty) {
 			case "easy":
 				return 5;
-			case "medium":
+			case "med":
 				return 20;
 			case "hard":
 				return 50;
@@ -30,15 +31,30 @@ export default function ListItem(props) {
 		}
 	}
 
+	const getButtonColor = () => {
+		switch (item.difficulty) {
+			case "easy":
+				return "#8DE78D";
+			case "med":
+				return "#F0B34A";
+			case "hard":
+				return "#F74B4A";
+			default:
+				break;
+		}
+	}
+
 	return (
 		<View style={styles.container}>
-			<IconButton icon={getIcon()} color={ticked ? "#858585" : "#000"} onPress={
-				() => {
-					setTicked(!ticked);
-					if (!ticked)
-						props.onComplete(`Task completed: Earned ${getPoints()} points`, getPoints());
-				}
-			} />
+			<View style={{ flexDirection: "row", marginRight: 5, borderBottomLeftRadius: 8, borderTopLeftRadius: 8, height: "100%", backgroundColor: getButtonColor() }} >
+				<IconButton style={{ alignSelf: "center" }} icon={getIcon()} color={ticked ? "#858585" : "#000"} onPress={
+					() => {
+						setTicked(!ticked);
+						if (!ticked)
+							props.onComplete(`Task completed: Earned ${getPoints()} points`, getPoints());
+					}
+				} />
+			</View>
 			<View style={styles.listItem}>
 				<TouchableOpacity style={{ height: "100%", width: "100%", justifyContent: "center" }}
 					onPress={() => {
@@ -48,16 +64,10 @@ export default function ListItem(props) {
 							onDelete: props.onDelete
 						});
 					}}>
-					<Text style={{ fontWeight: "700", color: ticked ? "#858585" : "#000" }}> {item.title}</Text>
-					{/* TODO - add repeat info */}
-					<View>
-						<Text style={{ color: "#858585" }}> {item.description}</Text>
-
-						{/* <Text style={{ color: "#858585" }}> {item.}</Text> */}
-					</View>
+					<ScheduleItemContent color={ticked ? "#858585" : "#000"} item={item} />
 				</TouchableOpacity>
 			</View>
-		</View>
+		</View >
 	);
 }
 
@@ -70,8 +80,6 @@ const styles = StyleSheet.create({
 		backgroundColor: "#fff",
 		flexDirection: "row",
 		alignItems: "center",
-	},
-	icon: {
 	},
 	listItem: {
 		flex: 2,

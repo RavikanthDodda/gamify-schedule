@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet,SafeAreaView, Text,ScrollView, View , Alert} from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import UserCoupon from '../components/UserCoupon'
+import UserCoupon from '../customer/components/UserCoupon'
 import UserCouponsService from "../services/UserCouponsService";
 
 function UserCouponsPage({navigation}) {
