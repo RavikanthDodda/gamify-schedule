@@ -20,7 +20,7 @@ export default class App extends React.Component {
   }
 
   getComponent() {
-    switch (this.state.user) {
+    switch (this.state.user?.type) {
       case "CUSTOMER":
         return <CustomerNav />;
       //   case 'CUSTOMER':
