@@ -30,7 +30,7 @@ function Store(props) {
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("Details-Page", {
-                  item:"featuredCoupons",
+                  item:"featured Coupon",
                   paramKey: "Amazon Fashion",
                   expirydate: "30/5/2021",
                   details: "Deals on clothing",
@@ -46,7 +46,7 @@ function Store(props) {
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("Details-Page", {
-                  item:"featuredCoupons",
+                  item:"featured Coupon",
                   paramKey: "Walmart",
                   expirydate: "30/4/2021",
                   details: "Early access to video games at store",
@@ -62,7 +62,7 @@ function Store(props) {
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("Details-Page", {
-                  item:"featuredCoupons",
+                  item:"featured Coupon",
                   paramKey: "Amazon Fresh",
                   expirydate: "30/4/2021",
                   details: "Early access to video games at store",
@@ -80,7 +80,7 @@ function Store(props) {
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("Details-Page", {
-                  item:"featuredCoupons",
+                  item:"featured Coupon",
                   paramKey: "Costco",
                   expirydate: "30/6/2021",
                   details: "Offers on costco travel package",
@@ -96,7 +96,7 @@ function Store(props) {
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("Details-Page", {
-                  item:"featuredCoupons",
+                  item:"featured Coupon",
                   paramKey: "Amazon Prime",
                   expirydate: "10/5/2021",
                   details: "Only for prime members.",
@@ -112,7 +112,7 @@ function Store(props) {
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("Details-Page", {
-                  item:"featuredCoupons",
+                  item:"featured Coupon",
                   paramKey: "Target",
                   expirydate: "30/4/2021",
                   details: "Early access to video games at store",

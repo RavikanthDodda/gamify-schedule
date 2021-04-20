@@ -41,7 +41,7 @@ function OfferDetailsPage(props) {
       props.navigation.navigate("Offers List", {
         action: "Purchased "+ text +" offer",
       });
-    } else if(itemType === "featuredCoupons"){
+    } else if(itemType === "featured Coupon"){
       props.navigation.navigate("Store", {
         action: "Purchased "+ text +" coupon",
       });
@@ -66,7 +66,7 @@ function OfferDetailsPage(props) {
             <Text >Remaining balance after purchase: {remainingBalance} points</Text>
         </View>
         <View style={styles.btn}>
-            <Button  mode="contained" onPress = {buyCoupon}>Get Coupon</Button>
+            <Button  mode="contained" onPress = {buyCoupon}>Get {itemType}</Button>
         </View>
     </View>
   );
