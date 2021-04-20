@@ -22,6 +22,7 @@ export default function UserOffer(props) {
         </View>
         )}
         onPress={() => props.navigation.navigate("Details-Page", {
+            item:"offer",
             paramKey: offertitle,
             expirydate:expiry,
             details:extraDetails,

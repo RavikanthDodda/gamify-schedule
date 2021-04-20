@@ -1,23 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { List } from "react-native-paper";
 import { TouchableOpacity, ScrollView, Image } from "react-native";
-
+import { Snackbar } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
 
-function Store({ navigation }) {
+function Store(props) {
+  const { route, navigation} = props;
+  const [showBar, setShowBar] = useState(false);
+	const [message, setMessage] = useState();
+
+  const notify = (mesg) => {
+		setMessage(mesg);
+		setShowBar(true);
+	}
+
+  if (props.route.params!== undefined) {
+		let mesg = props.route.params.action;
+    console.log(mesg);
+		props.route.params = undefined;
+		notify(mesg);
+	}
+
   return (
-    <View>
+    <React.Fragment>
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.featuredText}>Featured Coupons</Text>
           <View style={styles.row1}>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("Purchase-Coupon", {
+                navigation.navigate("Details-Page", {
+                  item:"featuredCoupons",
                   paramKey: "Amazon Fashion",
                   expirydate: "30/5/2021",
                   details: "Deals on clothing",
-                  cost: 100,
+                  cost: 70,
                 })
               }
             >
@@ -28,11 +45,12 @@ function Store({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("Purchase-Coupon", {
+                navigation.navigate("Details-Page", {
+                  item:"featuredCoupons",
                   paramKey: "Walmart",
                   expirydate: "30/4/2021",
                   details: "Early access to video games at store",
-                  cost: 200,
+                  cost: 30,
                 })
               }
             >
@@ -43,11 +61,12 @@ function Store({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("Purchase-Coupon", {
-                  paramKey: "Walmart",
+                navigation.navigate("Details-Page", {
+                  item:"featuredCoupons",
+                  paramKey: "Amazon Fresh",
                   expirydate: "30/4/2021",
                   details: "Early access to video games at store",
-                  cost: 200,
+                  cost: 40,
                 })
               }
             >
@@ -60,11 +79,12 @@ function Store({ navigation }) {
           <View style={styles.row1}>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("Purchase-Coupon", {
+                navigation.navigate("Details-Page", {
+                  item:"featuredCoupons",
                   paramKey: "Costco",
                   expirydate: "30/6/2021",
                   details: "Offers on costco travel package",
-                  cost: 100,
+                  cost: 30,
                 })
               }
             >
@@ -75,7 +95,8 @@ function Store({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("Purchase-Coupon", {
+                navigation.navigate("Details-Page", {
+                  item:"featuredCoupons",
                   paramKey: "Amazon Prime",
                   expirydate: "10/5/2021",
                   details: "Only for prime members.",
@@ -90,11 +111,12 @@ function Store({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("Purchase-Coupon", {
-                  paramKey: "Walmart",
+                navigation.navigate("Details-Page", {
+                  item:"featuredCoupons",
+                  paramKey: "Target",
                   expirydate: "30/4/2021",
                   details: "Early access to video games at store",
-                  cost: 200,
+                  cost: 20,
                 })
               }
             >
@@ -106,7 +128,6 @@ function Store({ navigation }) {
           </View>
         </View>
         <Text style={styles.featuredText}>Categories</Text>
-        <ScrollView>
           <View style={styles.categories}>
             <List.Item
               title="Coupons"
@@ -131,9 +152,20 @@ function Store({ navigation }) {
               }
             />
           </View>
-        </ScrollView>
       </ScrollView>
-    </View>
+      <Snackbar
+				visible={showBar}
+				onDismiss={() => setShowBar(false)}
+				action={{
+					label: "Ok",
+					onPress: () => {
+						console.log("pressed");
+					},
+				}}
+			>
+				{message}
+			</Snackbar>
+      </React.Fragment>
   );
 }
 

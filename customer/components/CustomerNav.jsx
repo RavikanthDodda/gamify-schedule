@@ -8,7 +8,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import StorePage from "../pages/Store";
 import UserCouponsPage from "../../Pages/UserCouponsPage";
 import UserOffersPage from "../../Pages/UserOffersPage";
-import PurchaseCoupon from "../pages/PurchaseCoupon";
 import ScheduleForm from "../../components/Forms/ScheduleForm";
 import TodoForm from "../../components/Forms/TodoForm";
 import UserOffersService from "../../services/UserOffersService";
@@ -90,11 +89,7 @@ export default class CustomerNav extends React.Component {
               name="Offers List"
               component={UserOffersPage}
             />
-            <Stack.Screen
-              options={({ route }) => ({ title: route.params.name })}
-              name="Purchase-Coupon"
-              component={PurchaseCoupon}
-            />
+           
             <Stack.Screen
               options={({ route }) => ({ title: route.params.name })}
               name="Details-Page"
