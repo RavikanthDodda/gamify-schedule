@@ -1,5 +1,7 @@
-import React from "react";
-import { Alert, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, Snackbar,StyleSheet, Text, View,ToastAndroid,
+  Platform,
+  AlertIOS, } from "react-native";
 import { List } from "react-native-paper";
 
 export default function UserCoupon(props) {
@@ -8,7 +10,6 @@ export default function UserCoupon(props) {
   let offertitle = props.title
   let description = props.description
   let extraDetails = props.extraDetails
-
   return (
     <View style={styles.container}>
       <List.Item
@@ -23,6 +24,7 @@ export default function UserCoupon(props) {
         </View>
         )}
         onPress={() => props.navigation.navigate("Details-Page", {
+          item:"coupon",
           paramKey: offertitle,
           expirydate:expiry,
           details:extraDetails,

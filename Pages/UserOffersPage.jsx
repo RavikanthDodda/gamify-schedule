@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet,SafeAreaView,ScrollView, Text, View , Alert} from "react-native";
+import { Snackbar } from "react-native-paper";
 import { FlatList } from "react-native-gesture-handler";
 import UserOffer from '../customer/components/UserOffer'
 import UserOffersService from "../services/UserOffersService";
 
-function UserOffersPage({navigation}) {
+function UserOffersPage(props) {
+  const { route, navigation} = props;
   const [offers, setOffers] = useState([]);
+  const [showBar, setShowBar] = useState(false);
+	const [message, setMessage] = useState();
+
 
   const loadOffers = () => {
     let data = UserOffersService.getOffers();
@@ -15,11 +20,23 @@ function UserOffersPage({navigation}) {
     console.log(offers);
   };
 
+  const notify = (mesg) => {
+		setMessage(mesg);
+		setShowBar(true);
+	}
+
+  if (props.route.params.action !== undefined) {
+		let mesg = props.route.params.action;
+    console.log(mesg);
+		props.route.params.action = undefined;
+		notify(mesg);
+	}
+
   useEffect(() => {
      loadOffers();
   }, []);
     return (
-    <View>
+      <React.Fragment>
       <SafeAreaView >
       <FlatList
         data={offers}
@@ -28,7 +45,19 @@ function UserOffersPage({navigation}) {
         }
       />
       </SafeAreaView>
-    </View>
+			<Snackbar
+				visible={showBar}
+				onDismiss={() => setShowBar(false)}
+				action={{
+					label: "Ok",
+					onPress: () => {
+						console.log("pressed");
+					},
+				}}
+			>
+				{message}
+			</Snackbar>
+		</React.Fragment>
   );
 } 
 

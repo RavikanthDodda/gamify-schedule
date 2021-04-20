@@ -17,10 +17,9 @@ class CustomerService {
 		} catch (e) { }
 	}
 
-	async setPoints() {
-
+	async setPoints(points) {
 		try {
-			let data = JSON.parse(await AsyncStorage.setItem(String(this.pointsKey)));
+			await AsyncStorage.setItem(this.pointsKey, JSON.stringify(points.points));
 		} catch (e) { }
 	}
 
