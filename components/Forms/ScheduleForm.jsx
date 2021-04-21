@@ -285,7 +285,7 @@ export default function ScheduleForm(props) {
 						<Picker.Item label="Monthly" value="Monthly" />
 						<Picker.Item label="Yearly" value="Yearly" />
 					</Picker>
-					<Text>on every </Text>
+					{/* <Text>on every </Text>
 					<TextInput
 						value={repeatEvery}
 						textContentType="none"
@@ -293,7 +293,7 @@ export default function ScheduleForm(props) {
 						onChangeText={(repeatEvery) => setRepeatEvery(repeatEvery)}
 						style={{ height: 40, marginHorizontal: 8 }}
 					/>
-					<Text>{repeatOn}</Text>
+					<Text>{repeatOn}</Text> */}
 				</View>
 
 

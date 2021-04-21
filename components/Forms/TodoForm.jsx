@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, TextInput, Title, Chip } from "react-native-paper";
+import { Button, TextInput, Title, Chip, Paragraph, Dialog, Portal } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
 import { Picker } from "@react-native-community/picker";
 import { DatePickerModal } from "react-native-paper-dates";
@@ -23,6 +23,10 @@ export default function TodoForm(props) {
   const [showDate, setShowDate] = React.useState(false);
   const [showTime, setShowTime] = React.useState(false);
   const [difficulty, setDifficulty] = React.useState("");
+
+  const [visibleDialouge, setVisibleDialouge] = React.useState(false);
+  const showDialog = () => setVisibleDialouge(true);
+  const hideDialog = () => setVisibleDialouge(false);
 
   const onDismissSingle = React.useCallback(() => {
     setOpen(false);
@@ -80,7 +84,7 @@ export default function TodoForm(props) {
     });
     props.navigation.navigate("Home", {
       screen: "Todo",
-      params: { action: "task added" },
+      params: { action: "Todo saved" },
     });
   };
 
@@ -90,7 +94,7 @@ export default function TodoForm(props) {
     );
     props.navigation.navigate("Home", {
       screen: "Todo",
-      params: { action: "task added" },
+      params: { action: "Todo deleted" },
     });
   };
 
@@ -183,7 +187,6 @@ export default function TodoForm(props) {
             <Picker.Item label="Hard" value="Hard" />
           </Picker>
         </View>
-
       <View style={styles.buttonParent}>
         <View style={styles.btn1}>
           <Button mode="contained" onPress={deleteTask}>

@@ -3,6 +3,8 @@ import { View, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { IconButton } from "react-native-paper";
 import ScheduleItemContent from "../../components/ScheduleItemContent";
+import TodoItemContent from "../../components/TodoItemContent";
+import CustomerService from "../../services/CustomerService";
 
 export default function ListItem(props) {
 	const { item } = props.item;
@@ -17,6 +19,9 @@ export default function ListItem(props) {
 		container.backgroundColor = ticked ? "" : "#fff"
 		return container
 	}
+	const getType = () =>{
+		return props.type == "todo";
+	}
 
 	const getPoints = () => {
 		switch (item.difficulty) {
@@ -30,6 +35,15 @@ export default function ListItem(props) {
 				break;
 		}
 	}
+	const deleteTask = async () => {
+		const res = await CustomerService.deleteTodoTask(
+		  item.id
+		);
+		props.navigation.navigate("Home", {
+		  screen: "Todo",
+		  params: { action: "Todo completed" },
+		});
+	  };
 
 	const getButtonColor = () => {
 		switch (item.difficulty) {
@@ -52,6 +66,9 @@ export default function ListItem(props) {
 						setTicked(!ticked);
 						if (!ticked)
 							props.onComplete(`Task completed: Earned ${getPoints()} points`, getPoints());
+							if(getType()){
+								deleteTask();
+							}
 					}
 				} />
 			</View>
@@ -59,12 +76,15 @@ export default function ListItem(props) {
 				<TouchableOpacity style={{ height: "100%", width: "100%", justifyContent: "center" }}
 					onPress={() => {
 						props.navigation.navigate(props.page, {
-							name: "Edit task",
+							name: getType() ? "Edit todo" : "Edit task",
 							taskId: item.id,
 							onDelete: props.onDelete
 						});
 					}}>
-					<ScheduleItemContent color={ticked ? "#858585" : "#000"} item={item} />
+					{ getType()
+					? <TodoItemContent color={ticked ? "#858585" : "#000"} item={item} />
+					: <ScheduleItemContent color={ticked ? "#858585" : "#000"} item={item} />
+					}				
 				</TouchableOpacity>
 			</View>
 		</View >
