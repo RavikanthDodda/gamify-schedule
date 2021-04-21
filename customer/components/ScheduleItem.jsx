@@ -9,9 +9,6 @@ import CustomerService from "../../services/CustomerService";
 export default function ListItem(props) {
 	const { item } = props.item;
 	const [ticked, setTicked] = useState(false);
-	console.log(props.type);
-	console.log("done-----");
-
 
 	const getIcon = () => {
 		return ticked ? "checkbox-marked-circle" : "checkbox-blank-circle-outline";
@@ -79,7 +76,7 @@ export default function ListItem(props) {
 				<TouchableOpacity style={{ height: "100%", width: "100%", justifyContent: "center" }}
 					onPress={() => {
 						props.navigation.navigate(props.page, {
-							name: "Edit task",
+							name: getType() ? "Edit todo" : "Edit task",
 							taskId: item.id,
 							onDelete: props.onDelete
 						});

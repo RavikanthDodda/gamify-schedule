@@ -13,7 +13,7 @@ export default function LoginPage({ navigation }) {
 
   const { setUser } = useContext(AuthContext);
   const validateLogin = () => {
-    if (username === "" && password === "")
+    if (username === "Ravi" && password === "password")
       setUser({
         type: "CUSTOMER",
         name: "Ravi",

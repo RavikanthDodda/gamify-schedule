@@ -84,7 +84,7 @@ export default function TodoForm(props) {
     });
     props.navigation.navigate("Home", {
       screen: "Todo",
-      params: { action: "task added" },
+      params: { action: "Todo saved" },
     });
   };
 
@@ -94,7 +94,7 @@ export default function TodoForm(props) {
     );
     props.navigation.navigate("Home", {
       screen: "Todo",
-      params: { action: "task added" },
+      params: { action: "Todo deleted" },
     });
   };
 
