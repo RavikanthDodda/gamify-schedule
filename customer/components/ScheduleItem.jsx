@@ -3,10 +3,15 @@ import { View, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { IconButton } from "react-native-paper";
 import ScheduleItemContent from "../../components/ScheduleItemContent";
+import TodoItemContent from "../../components/TodoItemContent";
+import CustomerService from "../../services/CustomerService";
 
 export default function ListItem(props) {
 	const { item } = props.item;
 	const [ticked, setTicked] = useState(false);
+	console.log(props.type);
+	console.log("done-----");
+
 
 	const getIcon = () => {
 		return ticked ? "checkbox-marked-circle" : "checkbox-blank-circle-outline";
@@ -16,6 +21,9 @@ export default function ListItem(props) {
 		const container = styles.container
 		container.backgroundColor = ticked ? "" : "#fff"
 		return container
+	}
+	const getType = () =>{
+		return props.type == "todo";
 	}
 
 	const getPoints = () => {
@@ -30,6 +38,15 @@ export default function ListItem(props) {
 				break;
 		}
 	}
+	const deleteTask = async () => {
+		const res = await CustomerService.deleteTodoTask(
+		  item.id
+		);
+		props.navigation.navigate("Home", {
+		  screen: "Todo",
+		  params: { action: "Todo completed" },
+		});
+	  };
 
 	const getButtonColor = () => {
 		switch (item.difficulty) {
@@ -52,6 +69,9 @@ export default function ListItem(props) {
 						setTicked(!ticked);
 						if (!ticked)
 							props.onComplete(`Task completed: Earned ${getPoints()} points`, getPoints());
+							if(getType()){
+								deleteTask();
+							}
 					}
 				} />
 			</View>
@@ -64,7 +84,10 @@ export default function ListItem(props) {
 							onDelete: props.onDelete
 						});
 					}}>
-					<ScheduleItemContent color={ticked ? "#858585" : "#000"} item={item} />
+					{ getType()
+					? <TodoItemContent color={ticked ? "#858585" : "#000"} item={item} />
+					: <ScheduleItemContent color={ticked ? "#858585" : "#000"} item={item} />
+					}				
 				</TouchableOpacity>
 			</View>
 		</View >
