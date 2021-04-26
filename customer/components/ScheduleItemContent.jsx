@@ -18,7 +18,6 @@ const ScheduleItemContent = (props) => {
           <MaterialCommunityIcons name="clock" color="#858585" size={10} />
           <Text style={{ color: "#858585" }}> 10:00 AM </Text>
         </View>
-
         {/* <Text style={{ color: "#858585" }}> {item.}</Text> */}
       </View>
     </View>
