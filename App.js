@@ -1,8 +1,9 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./Pages/LoginScreen";
-import CustomerNav from "./customer/components/CustomerNav";
+import CustomerNav from "./customer/layouts/CustomerNav";
 import { AuthContext } from "./components/AuthContext";
+import AdminNav from "./admin/AdminNav";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -21,12 +22,12 @@ export default class App extends React.Component {
 
   getComponent() {
     switch (this.state.user?.type) {
+      case "ADMIN":
+        return <AdminNav />;
       case "CUSTOMER":
         return <CustomerNav />;
-      //   case 'CUSTOMER':
 
-      //       break;
-      //   case 'CUSTOMER':
+      // case 'CUSTOMER':
 
       //       break;
       default:

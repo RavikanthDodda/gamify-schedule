@@ -21,7 +21,14 @@ export default function LoginPage({ navigation }) {
         phone: "+14809258752",
         location: "Tempe, AZ",
       });
-    else if (username === "Admin" && password === "password") setUser("ADMIN");
+    else if (username === "Admin" && password === "password")
+      setUser({
+        type: "ADMIN",
+        name: "Suyog",
+        username: "shalikar",
+        phone: "+14809258752",
+        location: "Tempe, AZ",
+      });
     else if (username === "Sponsor" && password === "password")
       setUser("SPONSOR");
     else if (username !== "" && password !== "") {

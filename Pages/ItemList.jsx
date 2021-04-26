@@ -4,94 +4,104 @@ import { Snackbar } from "react-native-paper";
 import AddFAB from "../components/AddFAB";
 
 import Item from "../customer/components/ScheduleItem";
+import SponsorItem from "../admin/SponsorItem";
 import CustomerService from "../services/CustomerService";
+import AdminService from "../services/AdminService";
 import { PointsContext } from "../customer/components/PointsContext";
 
 function ItemList(props) {
-	const { route, navigation } = props;
-	const [tasks, setTasks] = useState([]);
-	const [showBar, setShowBar] = useState(false);
-	const [message, setMessage] = useState("");
-	const { points, setPoints } = useContext(PointsContext);
+  const { route, navigation } = props;
+  const [tasks, setTasks] = useState([]);
+  const [showBar, setShowBar] = useState(false);
+  const [message, setMessage] = useState("");
+  const { points, setPoints } = useContext(PointsContext);
 
-	const notify = (mesg, pts) => {
-		setMessage(mesg);
-		setShowBar(true);
-		if (pts !== null)
-			setPoints(points + pts);
-	}
+  const notify = (mesg, pts) => {
+    setMessage(mesg);
+    setShowBar(true);
+    if (pts !== null) setPoints(points + pts);
+  };
 
+  const loadTasks = async () => {
+    let data;
+    switch (route.params?.item) {
+      case "schedule":
+        data = await CustomerService.getScheduleTasks();
+        break;
+      case "todo":
+        data = await CustomerService.getTodoTasks();
+        break;
+      case "sponsor":
+        data = await AdminService.getSponsors();
+      default:
+        break;
+    }
+    setTasks(data);
+  };
 
+  if (route.params.action !== undefined) {
+    let mesg = route.params.action;
+    route.params.action = undefined;
+    notify(mesg, null);
+    loadTasks();
+  }
 
-	const loadTasks = async () => {
-		let data;
-		switch (route.params?.item) {
-			case "schedule":
-				data = await CustomerService.getScheduleTasks();
-				break;
+  useEffect(() => {
+    loadTasks();
+  }, []);
+  // 	useEffect(() => {
+  // 		const unsubscribe = navigation.addListener("focus", () => {
+  // 			loadTasks();
+  // 		});
+  //
+  // 		return unsubscribe;
+  // 	}, [navigation]);
 
-			case "todo":
-				data = await CustomerService.getTodoTasks();
-				break;
-			default:
-				break;
-		}
-		setTasks(data);
-	};
+  const getItem = (item) => {
+    return route.params?.item !== "sponsor" ? (
+      <Item
+        item={item}
+        navigation={navigation}
+        type={route.params.item}
+        page={route.params.formPage}
+        onComplete={notify}
+      />
+    ) : (
+      <SponsorItem
+        item={item}
+        navigation={navigation}
+        page={route.params.formPage}
+        onComplete={notify}
+      />
+    );
+  };
 
-	if (route.params.action !== undefined) {
-		let mesg = route.params.action;
-		route.params.action = undefined;
-		notify(mesg, null);
-		loadTasks();
-	}
-
-	useEffect(() => {
-		loadTasks();
-
-	}, []);
-	// 	useEffect(() => {
-	// 		const unsubscribe = navigation.addListener("focus", () => {
-	// 			loadTasks();
-	// 		});
-	// 
-	// 		return unsubscribe;
-	// 	}, [navigation]);
-
-	return (
-		<React.Fragment>
-			<FlatList
-				data={tasks}
-				renderItem={(item) => (
-					<Item
-						item={item}
-						navigation={navigation}
-						type={route.params.item}
-						page={route.params.formPage}
-						onComplete={notify}
-					/>
-				)}
-				keyExtractor={(task) => task.id}
-			/>
-			<AddFAB
-				navigation={navigation}
-				page={route.params.formPage}
-				name={"Add new task"}
-			/>
-			<Snackbar
-				visible={showBar}
-				onDismiss={() => setShowBar(false)}
-				action={{
-					label: "Ok",
-					onPress: () => {
-						console.log("pressed");
-					},
-				}}
-			>
-				{message}
-			</Snackbar>
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      <FlatList
+        data={tasks}
+        renderItem={(item) => getItem(item)}
+        keyExtractor={(task) => task.id}
+      />
+      <AddFAB
+        navigation={navigation}
+        page={route.params.formPage}
+        name={"Add new task"}
+      />
+      <Snackbar
+        visible={showBar}
+        onDismiss={() => setShowBar(false)}
+        action={{
+          label: "Ok",
+          onPress: () => {
+            console.log("pressed");
+          },
+        }}
+      >
+        {message}
+      </Snackbar>
+    </React.Fragment>
+  );
 }
 
 export default ItemList;
