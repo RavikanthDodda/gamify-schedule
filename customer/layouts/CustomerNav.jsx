@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "./NavBar";
+import NavBar from "../components/NavBar";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import CustomerService from "../../services/CustomerService";
@@ -8,12 +8,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import StorePage from "../pages/Store";
 import UserCouponsPage from "../../Pages/UserCouponsPage";
 import UserOffersPage from "../../Pages/UserOffersPage";
-import ScheduleForm from "../../components/Forms/ScheduleForm";
-import TodoForm from "../../components/Forms/TodoForm";
+import ScheduleForm from "../Forms/ScheduleForm";
+import TodoForm from "../Forms/TodoForm";
 import UserOffersService from "../../services/UserOffersService";
 import OfferDetailsPage from "../../Pages/OfferDetailsPage";
 
-import { PointsContext } from "./PointsContext";
+import { PointsContext } from "../components/PointsContext";
 
 export default class CustomerNav extends React.Component {
   constructor(props) {
