@@ -26,7 +26,7 @@ class AdminService {
     try {
       const oldValue = JSON.parse(await AsyncStorage.getItem(this.key));
       let jsonValue;
-      if (sponsor.id) {
+      if (sponsor.id !== null) {
         oldValue.forEach((element) => {
           if (element.id === sponsor.id) {
             element.email = sponsor.email;
@@ -37,8 +37,9 @@ class AdminService {
         });
         jsonValue = oldValue;
       } else {
-        task.id = uuidv4();
-        jsonValue = [...oldValue, task];
+        sponsor.id = uuidv4();
+        jsonValue = [...oldValue, sponsor];
+        console.log(jsonValue);
       }
       await AsyncStorage.setItem(this.key, JSON.stringify(jsonValue));
     } catch (e) {}

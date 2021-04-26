@@ -25,12 +25,8 @@ export default function SponsorForm(props) {
   };
 
   useEffect(() => {
-    const unsubscribe = props.navigation.addListener("focus", () => {
-      loadSponsor();
-    });
-
-    return unsubscribe;
-  }, [props.navigation]);
+    loadSponsor();
+  }, []);
   const saveTask = async () => {
     await AdminService.saveSponsor({
       id: id,
@@ -71,7 +67,6 @@ export default function SponsorForm(props) {
           <TextInput
             label="Email"
             value={email}
-            textContentType="email"
             onChangeText={(text) => setEmail(text)}
           />
         </View>

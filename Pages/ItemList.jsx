@@ -43,19 +43,14 @@ function ItemList(props) {
     let mesg = route.params.action;
     route.params.action = undefined;
     notify(mesg, null);
-    loadTasks();
   }
-
   useEffect(() => {
-    loadTasks();
-  }, []);
-  // 	useEffect(() => {
-  // 		const unsubscribe = navigation.addListener("focus", () => {
-  // 			loadTasks();
-  // 		});
-  //
-  // 		return unsubscribe;
-  // 	}, [navigation]);
+    const unsubscribe = navigation.addListener("focus", () => {
+      loadTasks();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   const getItem = (item) => {
     return route.params?.item !== "sponsor" ? (
