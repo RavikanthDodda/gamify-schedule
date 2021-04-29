@@ -16,9 +16,14 @@ export default function ScheduleForm(props) {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+  const [visible, setVisible] = React.useState(false);
   const [difficulty, setDifficulty] = useState("");
   const [repeatOn, setRepeatOn] = useState("days");
   const [repeatEvery, setRepeatEvery] = useState("1");
+  const [hours, setHours] = React.useState("");
+  const [minutes, setMinutes] = React.useState("");
+  const [showDate, setShowDate] = React.useState(false);
+  const [showTime, setShowTime] = React.useState(false);
   const [sun, setSun] = useState(false);
   const [mon, setMon] = useState(false);
   const [tue, setTue] = useState(false);
@@ -83,10 +88,23 @@ export default function ScheduleForm(props) {
       params: { action: id ? "Task deleted" : undefined },
     });
   };
+  const onDismiss = React.useCallback(() => {
+    setVisible(false);
+  }, [setVisible]);
 
   const onDismissSingle = React.useCallback(() => {
     setOpen(false);
   }, [setOpen]);
+
+  const onConfirm = React.useCallback(
+    ({ hours, minutes }) => {
+      setVisible(false);
+      setHours(hours);
+      setMinutes(minutes);
+      setShowTime(true);
+    },
+    [setVisible]
+  );
 
   const onConfirmSingle = React.useCallback(
     (params) => {
@@ -243,22 +261,20 @@ export default function ScheduleForm(props) {
         >
           <Text>Time </Text>
 
-          <View>
+          <View style={{ marginLeft: 20 }}>
             <Button
               mode="contained"
               color="#E7E7E7"
-              style={{ marginLeft: 20 }}
               onPress={() => setVisible(true)}
             >
-              {/* { */}
-              {/* 	hours || minutes */}
-              {/* 		? hours + ":" + minutes */}
-              {/* 		: Moment().format("HH:mm") */}
-              {/* } */}
-              10:00 PM
+              {hours || minutes
+                ? hours + ":" + minutes
+                : Moment().format("HH:mm")}
             </Button>
             <TimePickerModal
-              visible={false}
+              visible={visible}
+              onDismiss={onDismiss}
+              onConfirm={onConfirm}
               // hours={12} // default: current hours
               // minutes={14} // default: current minutes
               animationType="fade"
