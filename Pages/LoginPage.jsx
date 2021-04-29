@@ -29,8 +29,14 @@ export default function LoginPage({ navigation }) {
         phone: "+14809258752",
         location: "Tempe, AZ",
       });
-    else if (username === "Sponsor" && password === "password")
-      setUser("SPONSOR");
+    else if (username === "P" && password === "P")
+    setUser({
+      type: "SPONSOR",
+      name: "Amazon",
+      username: "amazon",
+      phone: "+14809258752",
+      location: "Tempe, AZ",
+    });
     else if (username !== "" && password !== "") {
       setUsernameError("Username or Password is wrong. Please re-enter");
     }

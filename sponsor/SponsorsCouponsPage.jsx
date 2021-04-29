@@ -3,31 +3,26 @@ import { StyleSheet,SafeAreaView, Text,ScrollView, View , Alert} from "react-nat
 import { FlatList } from "react-native-gesture-handler";
 import { Snackbar } from "react-native-paper";
 import UserCoupon from '../customer/components/UserCoupon'
-import UserCouponsService from "../services/UserCouponsService";
+import SponsorService from "../services/SponsorService";
+import AddFAB from "../components/AddFAB";
 
-function UserCouponsPage(props) {
+function SponsorsCouponsPage(props) {
   const { route, navigation} = props;
   const [coupons, setCoupons] = useState([]);
   const [showBar, setShowBar] = useState(false);
-	const [message, setMessage] = useState();
-  let routePage = "";
-
-  if (props.route.params.item !== undefined) {
-		routePage = props.route.params.item
-	}else{
-    routePage = "Details-Page"
-  }
+  const [message, setMessage] = useState();
+  let routePage = "Coupons-Form";
 
 
-  const loadCoupons = () => {
-    let data = UserCouponsService.getCoupons();
-    setCoupons(UserCouponsService.getCoupons());
+  const loadCoupons = async () => {
+    let data = await SponsorService.getCoupons();
+    setCoupons(data);
   };
 
   const notify = (mesg) => {
 		setMessage(mesg);
 		setShowBar(true);
-	}
+   }
 
   if (props.route.params.action !== undefined) {
 		let mesg = props.route.params.action;
@@ -37,11 +32,16 @@ function UserCouponsPage(props) {
 	}
 
   useEffect(() => {
-     loadCoupons();
-  }, []);
+    const unsubscribe = navigation.addListener("focus", () => {
+        loadCoupons();
+      });
+  
+      return unsubscribe;
+    }, [navigation]);
     return (
     
      <React.Fragment>
+
      <SafeAreaView >
       <FlatList
         contentContainerStyle= {{paddingBottom: 200}}
@@ -52,6 +52,11 @@ function UserCouponsPage(props) {
         }
       />
      </SafeAreaView>
+     <AddFAB
+        navigation={navigation}
+        page="Coupons-Form"
+        name={"Add New Coupon"}
+      />
 			<Snackbar
 				visible={showBar}
 				onDismiss={() => setShowBar(false)}
@@ -79,4 +84,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default UserCouponsPage;
+export default SponsorsCouponsPage;

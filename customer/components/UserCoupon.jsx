@@ -10,6 +10,23 @@ export default function UserCoupon(props) {
   let offertitle = props.title
   let description = props.description
   let extraDetails = props.extraDetails
+  let routeDetails = props.routeDetails
+  let itemId = props.item.id;
+
+//   useEffect(() => {
+//     loadRoteDetails();
+//  }, []);
+
+//  const loadRoteDetails = () => {
+//   if (routeDetails != null) {
+//     if(routeDetails === "coupon"){
+//       nextPage = "Coupon-Form";
+//     } else{
+//       nextPage = "Details-Page";
+//     }
+//   }
+// };
+
   return (
     <View style={styles.container}>
       <List.Item
@@ -23,12 +40,13 @@ export default function UserCoupon(props) {
           <Text style={styles.moreDetails}>more details..</Text>
         </View>
         )}
-        onPress={() => props.navigation.navigate("Details-Page", {
+        onPress={() => props.navigation.navigate(routeDetails, {
           item:"coupon",
           paramKey: offertitle,
           expirydate:expiry,
           details:extraDetails,
           cost : cost,
+          id:itemId,
         })}
         style={styles.listItem}
       />

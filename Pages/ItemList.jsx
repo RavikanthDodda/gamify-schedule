@@ -7,7 +7,9 @@ import Item from "../customer/components/ScheduleItem";
 import SponsorItem from "../admin/SponsorItem";
 import CustomerService from "../services/CustomerService";
 import AdminService from "../services/AdminService";
+import UserCouponsService from "../services/UserCouponsService";
 import { PointsContext } from "../customer/components/PointsContext";
+
 
 function ItemList(props) {
   const { route, navigation } = props;
@@ -33,6 +35,8 @@ function ItemList(props) {
         break;
       case "sponsor":
         data = await AdminService.getSponsors();
+      case "coupon":
+        data = await UserCouponsService.getCoupons();
       default:
         break;
     }
