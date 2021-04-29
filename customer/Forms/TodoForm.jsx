@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, TextInput, Title, Chip, Paragraph, Dialog, Portal } from "react-native-paper";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, TextInput, Title } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
 import { Picker } from "@react-native-community/picker";
 import { DatePickerModal } from "react-native-paper-dates";
 import { TimePickerModal } from "react-native-paper-dates";
@@ -15,14 +15,14 @@ export default function TodoForm(props) {
   const [id, setId] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = React.useState(undefined);
-  const [open, setOpen] = React.useState(false);
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
   const [visible, setVisible] = React.useState(false);
   const [hours, setHours] = React.useState("");
   const [minutes, setMinutes] = React.useState("");
   const [showDate, setShowDate] = React.useState(false);
   const [showTime, setShowTime] = React.useState(false);
-  const [difficulty, setDifficulty] = React.useState("");
+  const [difficulty, setDifficulty] = React.useState("easy");
 
   const [visibleDialouge, setVisibleDialouge] = React.useState(false);
   const showDialog = () => setVisibleDialouge(true);
@@ -60,7 +60,7 @@ export default function TodoForm(props) {
       setId(data.id);
       setTitle(data.title);
       setDescription(data.description);
-      setDate(new Date(data.date))
+      if (data.date) setDate(new Date(data.date));
       setHours(data.hours);
       setMinutes(data.minutes);
       setDifficulty(data.difficulty);
@@ -80,7 +80,7 @@ export default function TodoForm(props) {
       date: date.toString(),
       hours: hours,
       minutes: minutes,
-      difficulty: difficulty
+      difficulty: difficulty,
     });
     props.navigation.navigate("Home", {
       screen: "Todo",
@@ -100,39 +100,38 @@ export default function TodoForm(props) {
 
   return (
     <ScrollView keyboardShouldPersistTaps={"never"}>
-    <View style={styles.container}>
-      <View style={styles.field}>
-        <TextInput
-          label="Title"
-          value={title}
-          textContentType="jobTitle"
-          onChangeText={(title) => setTitle(title)}
-        />
-      </View>
-      <View style={styles.field}>
-        <TextInput
-          label="Description"
-          value={description}
-          textContentType="fullStreetAddress"
-          onChangeText={(description) => setDescription(description)}
-        />
-      </View>
+      <View style={styles.container}>
+        <View style={styles.field}>
+          <TextInput
+            label="Title"
+            value={title}
+            textContentType="jobTitle"
+            onChangeText={(title) => setTitle(title)}
+          />
+        </View>
+        <View style={styles.field}>
+          <TextInput
+            label="Description"
+            value={description}
+            textContentType="fullStreetAddress"
+            onChangeText={(description) => setDescription(description)}
+          />
+        </View>
 
-      <Title style={{ fontSize: 17, marginTop: 20 }}>Due date and time</Title>
+        <Title style={{ fontSize: 17, marginTop: 20 }}>Due date and time</Title>
         <View style={styles.picker}>
           <View>
-              <Button 
-              mode="contained" 
+            <Button
+              mode="contained"
               color="#E7E7E7"
-              style={{ width: 140 }} 
-              onPress={() => setOpen(true)} 
-              style={styles.dateButton}>
-                  {
-                    date
-                      ? Moment(date).format("MM-DD-YYYY")
-                      : Moment().format("MM-DD-YYYY")
-                  }
-              </Button>
+              style={{ width: 140 }}
+              onPress={() => setOpen(true)}
+              style={styles.dateButton}
+            >
+              {date
+                ? Moment(date).format("MM-DD-YYYY")
+                : Moment().format("MM-DD-YYYY")}
+            </Button>
             <DatePickerModal
               mode="single"
               visible={open}
@@ -145,16 +144,15 @@ export default function TodoForm(props) {
             />
           </View>
           <View>
-              <Button mode="contained" 
+            <Button
+              mode="contained"
               color="#E7E7E7"
-              style={{ width: 140 }} 
-              onPress={() => setVisible(true)}>
-                  {
-                    hours || minutes
-                      ? hours + ":" + minutes
-                      : Moment().format("HH:mm")
-                  }
-              </Button>
+              onPress={() => setVisible(true)}
+            >
+              {hours || minutes
+                ? hours + ":" + minutes
+                : Moment().format("HH:mm")}
+            </Button>
             <TimePickerModal
               visible={visible}
               onDismiss={onDismiss}
@@ -175,31 +173,31 @@ export default function TodoForm(props) {
             alignItems: "center",
           }}
         >
-          <Title style={{ fontSize: 17 }}>Difficulty</Title>
+          <Title style={{ fontSize: 17 }}>Priority</Title>
           <Picker
             selectedValue={difficulty}
             onValueChange={(difficulty) => setDifficulty(difficulty)}
             style={{ width: 170, marginLeft: 20 }}
             mode="dropdown"
           >
-            <Picker.Item label="Easy" value="Easy" />
-            <Picker.Item label="Medium" value="Medium" />
-            <Picker.Item label="Hard" value="Hard" />
+            <Picker.Item label="Low" value="easy" />
+            <Picker.Item label="Normal" value="med" />
+            <Picker.Item label="High" value="hard" />
           </Picker>
         </View>
-      <View style={styles.buttonParent}>
-        <View style={styles.btn1}>
-          <Button mode="contained" onPress={deleteTask}>
-            {props.route.params?.taskId ? "Delete" : "Cancel"}
-          </Button>
-        </View>
-        <View style={styles.btn2}>
-          <Button mode="contained" onPress={saveTask}>
-            Save
-          </Button>
+        <View style={styles.buttonParent}>
+          <View style={styles.btn1}>
+            <Button mode="contained" onPress={deleteTask}>
+              {props.route.params?.taskId ? "Delete" : "Cancel"}
+            </Button>
+          </View>
+          <View style={styles.btn2}>
+            <Button mode="contained" onPress={saveTask}>
+              Save
+            </Button>
+          </View>
         </View>
       </View>
-    </View>
     </ScrollView>
   );
 }
@@ -235,6 +233,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     display: "flex",
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "space-around",
   },
 });

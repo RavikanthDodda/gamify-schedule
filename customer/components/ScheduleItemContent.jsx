@@ -13,9 +13,9 @@ const ScheduleItemContent = (props) => {
       {/* TODO - add repeat info */}
       <View style={styles.repeat}>
         <MaterialCommunityIcons name="repeat" color="#858585" size={12} />
-        <Text style={{ color: "#858585" }}> {item.repeatOn}</Text>
+        <Text style={{ color: "#858585" }}> {item.repeatOn + "    "}</Text>
         <View style={styles.repeat}>
-          <MaterialCommunityIcons name="clock" color="#858585" size={10} />
+          <MaterialCommunityIcons name="clock" color="#858585" size={12} />
           <Text style={{ color: "#858585" }}> 10:00 AM </Text>
         </View>
         {/* <Text style={{ color: "#858585" }}> {item.}</Text> */}
