@@ -29,7 +29,7 @@ export default function LoginPage({ navigation }) {
         phone: "+14809258752",
         location: "Tempe, AZ",
       });
-    else if (username === "P" && password === "P")
+    else if (username === "Sponsor" && password === "password")
     setUser({
       type: "SPONSOR",
       name: "Amazon",

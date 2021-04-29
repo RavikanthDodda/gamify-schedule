@@ -35,8 +35,6 @@ function ItemList(props) {
         break;
       case "sponsor":
         data = await AdminService.getSponsors();
-      case "coupon":
-        data = await UserCouponsService.getCoupons();
       default:
         break;
     }
