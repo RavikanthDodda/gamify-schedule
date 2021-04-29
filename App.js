@@ -4,6 +4,7 @@ import LoginScreen from "./Pages/LoginScreen";
 import CustomerNav from "./customer/layouts/CustomerNav";
 import { AuthContext } from "./components/AuthContext";
 import AdminNav from "./admin/AdminNav";
+import SponsorNav from "./sponsor/SponsorNav";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -26,6 +27,8 @@ export default class App extends React.Component {
         return <AdminNav />;
       case "CUSTOMER":
         return <CustomerNav />;
+      case "SPONSOR":
+        return <SponsorNav />;
 
       // case 'CUSTOMER':
 
