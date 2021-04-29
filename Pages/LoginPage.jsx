@@ -13,7 +13,7 @@ export default function LoginPage({ navigation }) {
 
   const { setUser } = useContext(AuthContext);
   const validateLogin = () => {
-    if (username === "Ravi" && password === "password")
+    if (username === "Customer" && password === "1234")
       setUser({
         type: "CUSTOMER",
         name: "Ravi",
@@ -21,7 +21,7 @@ export default function LoginPage({ navigation }) {
         phone: "+14809258752",
         location: "Tempe, AZ",
       });
-    else if (username === "Admin" && password === "password")
+    else if (username === "Admin" && password === "1234")
       setUser({
         type: "ADMIN",
         name: "Suyog",
@@ -29,14 +29,14 @@ export default function LoginPage({ navigation }) {
         phone: "+14809258752",
         location: "Tempe, AZ",
       });
-    else if (username === "Sponsor" && password === "password")
-    setUser({
-      type: "SPONSOR",
-      name: "Amazon",
-      username: "amazon",
-      phone: "+14809258752",
-      location: "Tempe, AZ",
-    });
+    else if (username === "Sponsor" && password === "1234")
+      setUser({
+        type: "SPONSOR",
+        name: "Amazon",
+        username: "amazon",
+        phone: "+14809258752",
+        location: "Tempe, AZ",
+      });
     else if (username !== "" && password !== "") {
       setUsernameError("Username or Password is wrong. Please re-enter");
     }
